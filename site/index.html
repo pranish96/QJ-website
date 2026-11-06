@@ -267,6 +267,53 @@ footer a:hover{color:var(--fg)}
 .chipx{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line-2);font-size:.9rem;color:var(--fg)}
 .chipx em{font-style:normal;font-size:.75rem;color:var(--amber)}
 .chipx.add{color:var(--faint);border-style:dashed}
+/* phones */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);
+  transform:translateY(110%);transition:transform .25s ease;font-size:.88rem;color:var(--muted)}
+.mbar.show{transform:none}
+.mbar span{min-width:0;font-size:.8rem;line-height:1.35}
+.mbar b{color:var(--fg);font-weight:600;display:block;font-size:.92rem}
+@media (min-width:641px){.mbar{display:none}}
+@media (prefers-reduced-motion:reduce){.mbar{transition:none}}
+@media (max-width:640px){
+  body{font-size:16px}
+  .join input{flex:none;height:48px;font-size:16px}
+  .nav-r .btn{display:none}
+  .hero{padding-block:28px 16px}
+  .hero-copy{gap:18px}
+  .lede{font-size:1.05rem}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:14px;padding:0}
+  .win{display:none}
+  .pop{position:static;width:min(82%,300px)}
+  .toast{display:flex;position:static;width:100%;max-width:340px}
+  .boards{margin-top:36px;gap:10px 22px}
+  .boards span{font-size:1.1rem}
+  section{padding-block:56px}
+  .sec-head{gap:12px;margin-bottom:28px}
+  .sec-head p{font-size:1.02rem}
+  .hide-m{display:none!important}
+  .pain .n{font-size:2.2rem}
+  .steps li{grid-template-columns:52px 1fr;gap:12px;padding:16px 0}
+  .card{padding:20px;border-radius:16px}
+  .trust div{padding:20px}
+  .final{border-radius:20px}
+  footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  footer nav a{display:inline-block;padding:10px 2px}
+  .tbl{border:0;background:none;overflow:visible;border-radius:0}
+  table,tbody,tr,td{display:block}
+  table{min-width:0}
+  thead{display:none}
+  tbody{display:flex;flex-direction:column;gap:12px}
+  tr{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:6px 0 10px}
+  td,tr:last-child td{border:0;padding:7px 16px;display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-align:right;font-size:.9rem}
+  td:first-child{display:block;width:auto;text-align:left;font-family:var(--display);font-weight:600;font-size:1.02rem;padding:10px 16px 6px}
+  td[data-label]::before{content:attr(data-label);color:var(--faint);text-align:left;flex:none}
+  td.us{background:var(--fern-soft);margin:2px 10px;padding:9px 12px;border-radius:9px}
+  td.us::before{color:var(--fern);font-weight:600}
+  td .y{display:none}
+}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </head>
@@ -303,6 +350,8 @@ footer a:hover{color:var(--fg)}
     </div>
   </div>
 </header>
+
+<div class="mbar" id="mbar" aria-hidden="true"><span><b>Early access is open</b>30 days free for founding members</span><a class="btn btn-p btn-s" href="#top" data-focus-join tabindex="-1">Join the waitlist</a></div>
 
 <main id="top">
   <div class="hero gut">
@@ -382,8 +431,8 @@ footer a:hover{color:var(--fg)}
           <li><time class="tab">9:23</time><div><h3>Checks LinkedIn and your inbox</h3><p>Keeps hiring posts that match your roles and sorts recruiter replies, so an interview invite never sits unread.</p><span class="out">5 hiring posts, 3 recruiter emails</span></div></li>
         </ol>
         <div class="run-shot">
-          <div class="shot"><img src="shots/console-live.webp" width="1608" height="568" alt="The run console while applying: steps with timings on the left, and a live activity log of applications on the right, with a Stop run button." loading="lazy"></div>
-          <div class="shot"><img src="shots/console-done.webp" width="1608" height="680" alt="The finished run: every step done, a chip for each site with how many new jobs it had, and the activity log." loading="lazy"></div>
+          <div class="shot"><picture><source media="(max-width:640px)" srcset="shots/console-m.webp" width="1026" height="1698"><img src="shots/console-live.webp" width="1608" height="568" alt="The run console while applying: steps with timings on the left, and a live activity log of applications on the right, with a Stop run button." loading="lazy"></picture></div>
+          <div class="shot hide-m"><img src="shots/console-done.webp" width="1608" height="680" alt="The finished run: every step done, a chip for each site with how many new jobs it had, and the activity log." loading="lazy"></div>
           <p class="cap">The run console in your dashboard, during and after a run. Example data.</p>
         </div>
       </div>
@@ -402,7 +451,7 @@ footer a:hover{color:var(--fg)}
           <span class="tag">It never guesses</span>
           <h3>A new question holds the application and asks you, once</h3>
           <p>Notice-period buyout, reason for leaving, a skill it isn't sure you have. The application waits, you answer from your dashboard, and that answer fills every form that asks the same thing.</p>
-          <div class="shot"><img src="shots/answer.webp" width="1608" height="585" alt="A screening question waiting in the dashboard: 'Is your notice period negotiable, and would you consider a buyout?', marked Holding an application." loading="lazy"></div>
+          <div class="shot"><picture><source media="(max-width:640px)" srcset="shots/answer-m.webp" width="1026" height="460"><img src="shots/answer.webp" width="1608" height="585" alt="A screening question waiting in the dashboard: 'Is your notice period negotiable, and would you consider a buyout?', marked Holding an application." loading="lazy"></picture></div>
         </div>
         <div class="card c-mid">
           <span class="ico"><svg><use href="#i-ban"/></svg></span>
@@ -479,9 +528,9 @@ footer a:hover{color:var(--fg)}
         <p>Every application, every recruiter reply and every interview, linked to the job it came from. You see what's working and change course in a minute.</p>
       </div>
       <div class="pipe">
-        <div class="shot full"><img src="shots/pipeline.webp" width="1608" height="198" alt="Pipeline totals: 256 found, 151 passed filters, 7 waiting for you, 107 applied, 12 recruiters replied, 4 interviews." loading="lazy"></div>
-        <div class="shot"><img src="shots/applied.webp" width="1608" height="595" alt="Applied jobs with stages; one marked Interview with the recruiter's interview email linked under it." loading="lazy"></div>
-        <div class="shot" style="align-self:start"><img src="shots/heat.webp" width="1608" height="228" alt="A 12-week grid of application days: 107 applications on 35 days." loading="lazy"></div>
+        <div class="shot full"><picture><source media="(max-width:640px)" srcset="shots/pipeline-m.webp" width="1026" height="639"><img src="shots/pipeline.webp" width="1608" height="198" alt="Pipeline totals: 256 found, 151 passed filters, 7 waiting for you, 107 applied, 12 recruiters replied, 4 interviews." loading="lazy"></picture></div>
+        <div class="shot hide-m"><img src="shots/applied.webp" width="1608" height="595" alt="Applied jobs with stages; one marked Interview with the recruiter's interview email linked under it." loading="lazy"></div>
+        <div class="shot" style="align-self:start"><picture><source media="(max-width:640px)" srcset="shots/heat-m.webp" width="1026" height="408"><img src="shots/heat.webp" width="1608" height="228" alt="A 12-week grid of application days: 107 applications on 35 days." loading="lazy"></picture></div>
       </div>
       <p class="cap" style="margin-top:14px">Six weeks of an example search by a senior product analyst in Bengaluru. Companies are made up.</p>
     </div>
@@ -512,12 +561,12 @@ footer a:hover{color:var(--fg)}
         <table>
           <thead><tr><th scope="col"><span class="sr">What you need</span></th><th scope="col" class="us">Quickjobs</th><th scope="col">Applying by hand</th><th scope="col">Global auto-apply tools</th><th scope="col">A job board's own AI agent</th></tr></thead>
           <tbody>
-            <tr><td>Naukri, iimjobs, Shine, Foundit, Hirist, Instahyre</td><td class="us"><span class="y">✓</span> All six, every morning</td><td>One at a time</td><td>Mostly not covered</td><td>Its own site only</td></tr>
-            <tr><td>LinkedIn hiring posts and recruiter replies</td><td class="us"><span class="y">✓</span> Included</td><td>You check yourself</td><td>Varies</td><td><span class="m">—</span></td></tr>
-            <tr><td>CTC, notice period and buyout answered your way</td><td class="us"><span class="y">✓</span> Saved once, reused</td><td>Typed every time</td><td>Often generic</td><td>Varies</td></tr>
-            <tr><td>Never applies to your current employer</td><td class="us"><span class="y">✓</span> Blocked automatically</td><td>You remember</td><td>Varies</td><td>Varies</td></tr>
-            <tr><td>Runs while you're at work</td><td class="us"><span class="y">✓</span> 9:10 every morning</td><td><span class="m">No</span></td><td>Yes</td><td>Yes</td></tr>
-            <tr><td>Pricing</td><td class="us">Weekly plans in rupees</td><td>Your evenings</td><td>Often in dollars</td><td>Part of a paid plan</td></tr>
+            <tr><td>Naukri, iimjobs, Shine, Foundit, Hirist, Instahyre</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> All six, every morning</td><td data-label="By hand">One at a time</td><td data-label="Global tools">Mostly not covered</td><td data-label="A board's own agent">Its own site only</td></tr>
+            <tr><td>LinkedIn hiring posts and recruiter replies</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> Included</td><td data-label="By hand">You check yourself</td><td data-label="Global tools">Varies</td><td data-label="A board's own agent"><span class="m">—</span></td></tr>
+            <tr><td>CTC, notice period and buyout answered your way</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> Saved once, reused</td><td data-label="By hand">Typed every time</td><td data-label="Global tools">Often generic</td><td data-label="A board's own agent">Varies</td></tr>
+            <tr><td>Never applies to your current employer</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> Blocked automatically</td><td data-label="By hand">You remember</td><td data-label="Global tools">Varies</td><td data-label="A board's own agent">Varies</td></tr>
+            <tr><td>Runs while you're at work</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> 9:10 every morning</td><td data-label="By hand"><span class="m">No</span></td><td data-label="Global tools">Yes</td><td data-label="A board's own agent">Yes</td></tr>
+            <tr><td>Pricing</td><td data-label="Quickjobs" class="us">Weekly plans in rupees</td><td data-label="By hand">Your evenings</td><td data-label="Global tools">Often in dollars</td><td data-label="A board's own agent">Part of a paid plan</td></tr>
           </tbody>
         </table>
       </div>
@@ -625,6 +674,17 @@ footer a:hover{color:var(--fg)}
     setTimeout(() => { const i = $('#email-hero'); if (i) i.focus({ preventScroll: true }); }, 400);
   }));
 
+  // phones: a join bar at the bottom once the hero form is off screen, hidden near the other form or after joining
+  const mbar = $('#mbar');
+  if (mbar && 'IntersectionObserver' in window) {
+    const seen = new Set();
+    const sync = () => { const on = !store.get('qj-joined') && seen.size === 0 && scrollY > 300; mbar.classList.toggle('show', on); mbar.setAttribute('aria-hidden', on ? 'false' : 'true'); $('a', mbar).tabIndex = on ? 0 : -1; };
+    const io = new IntersectionObserver((es) => { es.forEach((e) => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)); sync(); });
+    $$('.joinbox').forEach((b) => io.observe(b));
+    addEventListener('scroll', sync, { passive: true });
+    window.__qjSyncBar = sync;
+  }
+
   // the morning run: highlight each step in turn while the section is on screen
   const steps = $$('#steps li');
   let idx = 0, timer = null;
@@ -718,7 +778,7 @@ footer a:hover{color:var(--fg)}
       err.textContent = ''; btn.disabled = true; const label = btn.textContent; btn.textContent = 'Joining…';
       try {
         const r = await join(email);
-        store.set('qj-joined', { email, ref_code: r.ref_code ?? null });
+        store.set('qj-joined', { email, ref_code: r.ref_code ?? null }); window.__qjSyncBar?.();
         $$('.joinbox').forEach((b) => showDone(b, email, b === box ? r : { already: true, ref_code: r.ref_code }));
       } catch (ex) {
         btn.disabled = false; btn.textContent = label;
