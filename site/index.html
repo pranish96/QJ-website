@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
-<script>try { const t = localStorage.getItem('qj-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}</script>
 <script>
 // Waitlist goes to the live Supabase project (migration 27). The publishable key only allows what
 // row-level security and the two waitlist functions allow. Set "site" to the real address once the domain exists.
@@ -31,18 +30,6 @@ window.QJ_CFG = { url: "https://igaryftppmiybqhywkwb.supabase.co", key: "sb_publ
   --r:14px; --r-sm:10px;
   --w:1180px;
 }
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f7f3; --surface:#ffffff; --sunk:#ecf2ed; --line:#dde6df; --line-2:#c8d6cc;
-  --fg:#0e1a13; --muted:#46594c; --faint:#5c6f63;
-  --fern:#17804d; --fern-ink:#ffffff; --fern-soft:rgba(23,128,77,.1); --hover:#126a40;
-  --amber:#9a520a; --blue:#2f5fd0; --forest:#2e6b3f;
-  --glass:rgba(255,255,255,.88); --board:#26362c; --err:#b3261e; --shadow:rgba(24,48,34,.22); --aurora:.3;
-  color-scheme:light}}
-:root[data-theme="light"]{--bg:#f4f7f3; --surface:#ffffff; --sunk:#ecf2ed; --line:#dde6df; --line-2:#c8d6cc;
-  --fg:#0e1a13; --muted:#46594c; --faint:#5c6f63;
-  --fern:#17804d; --fern-ink:#ffffff; --fern-soft:rgba(23,128,77,.1); --hover:#126a40;
-  --amber:#9a520a; --blue:#2f5fd0; --forest:#2e6b3f;
-  --glass:rgba(255,255,255,.88); --board:#26362c; --err:#b3261e; --shadow:rgba(24,48,34,.22); --aurora:.3;
-  color-scheme:light}
 /* product screenshots and the hero window stay in the product's own dark look */
 .win,.pop{--surface:#0f1b16;--line:#223529;--line-2:#2c4535;--fg:#e8efe9;--muted:#9db1a3;--fern:#4fbf86;color:var(--fg)}
 *{box-sizing:border-box}
@@ -80,12 +67,6 @@ img{max-width:100%;display:block;height:auto}
 .nav-r{display:flex;align-items:center;gap:22px}
 .nav-r a.lnk{color:var(--muted);text-decoration:none;font-size:.95rem}
 .nav-r a.lnk:hover{color:var(--fg)}
-.theme{appearance:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line-2);background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer;flex:none}
-.theme:hover{color:var(--fg);border-color:var(--fern)}
-.theme svg{width:20px;height:20px;grid-area:1/1}
-.theme .moon{display:none}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .theme .sun{display:none}:root:not([data-theme="dark"]) .theme .moon{display:block}}
-:root[data-theme="light"] .theme .sun{display:none}:root[data-theme="light"] .theme .moon{display:block}
 @media (max-width:640px){.nav-r a.lnk,.logo .badge{display:none}}
 
 /* buttons and form */
@@ -409,7 +390,6 @@ footer a:hover{color:var(--fg)}
       <a class="lnk" href="#how">How it works</a>
       <a class="lnk" href="#control">Control</a>
       <a class="lnk" href="#faq">Questions</a>
-      <button class="theme" id="theme" type="button" aria-label="Switch to light mode"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
       <a class="btn btn-p btn-s" href="#top" data-focus-join>Join the waitlist</a>
     </div>
   </div>
@@ -765,13 +745,6 @@ footer a:hover{color:var(--fg)}
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
   if (PROD) $('#legal').hidden = false;
-
-  // light / dark: follows the device until the visitor picks one
-  const themeBtn = $('#theme');
-  const isLight = () => { const t = document.documentElement.dataset.theme; return t ? t === 'light' : matchMedia('(prefers-color-scheme: light)').matches; };
-  const label = () => themeBtn && themeBtn.setAttribute('aria-label', isLight() ? 'Switch to dark mode' : 'Switch to light mode');
-  if (themeBtn) { label(); themeBtn.addEventListener('click', () => { const t = isLight() ? 'dark' : 'light'; document.documentElement.dataset.theme = t; store.set('qj-theme', t); try { localStorage.setItem('qj-theme', t); } catch {} label(); }); }
-  matchMedia('(prefers-color-scheme: light)').addEventListener?.('change', label);
 
   // nav border on scroll
   const nav = $('#nav');
