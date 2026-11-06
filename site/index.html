@@ -154,6 +154,50 @@ section{padding-block:96px}
 .cap{font-size:.86rem;color:var(--faint)}
 @media (max-width:960px){.run{grid-template-columns:1fr;gap:36px}.run-shot{position:static;order:-1}.steps li::before{display:none}}
 
+/* how it works: one step and one screenshot at a time */
+.story{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:64px;align-items:start}
+.story-steps{list-style:none;margin:0;padding:0 0 18vh;display:flex;flex-direction:column}
+.st{min-height:68vh;display:flex;flex-direction:column;justify-content:center;gap:12px;padding-left:28px;position:relative;transition:opacity .45s ease}
+.st::before{content:"";position:absolute;left:0;top:calc(50% - 60px);height:120px;width:2px;border-radius:2px;background:var(--line-2);transition:background .45s}
+.st-meta{display:flex;align-items:center;gap:12px}
+.st time{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--fern);background:var(--fern-soft);border-radius:8px;padding:3px 10px}
+.st-n{font-family:var(--display);font-weight:600;font-size:.85rem;color:var(--faint);letter-spacing:.06em}
+.st h3{font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.02em}
+.st p{color:var(--muted);font-size:1.06rem;max-width:30em}
+.st .out{align-self:flex-start;font-size:.88rem;color:var(--fern);background:var(--fern-soft);border-radius:7px;padding:4px 10px}
+.st-shot{display:none;margin:8px 0 0;flex-direction:column;gap:12px}
+.story.js .st{opacity:.28}
+.story.js .st.on{opacity:1}
+.story.js .st.on::before{background:var(--fern)}
+.story-stage{position:sticky;top:max(88px,calc(50vh - 330px));height:min(660px,calc(100vh - 120px))}
+.stage-in{height:100%;display:flex;flex-direction:column;gap:14px;border:1px solid var(--line-2);border-radius:22px;padding:18px;
+  background:radial-gradient(70% 60% at 70% 0%,rgba(79,191,134,.14),transparent 70%),radial-gradient(60% 60% at 0% 100%,rgba(52,86,200,.12),transparent 70%),var(--surface);
+  box-shadow:0 50px 90px -50px rgba(0,0,0,.95)}
+.stage-head,.stage-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.85rem;color:var(--faint)}
+.stage-head .count{color:var(--muted)}.stage-head .count b{color:var(--fg);font-family:var(--display)}
+.frames{position:relative;flex:1;min-height:0}
+.fr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;
+  transform:translateY(48px) scale(.97);transition:opacity .5s ease,transform .7s cubic-bezier(.2,.75,.2,1);pointer-events:none}
+.fr.past{transform:translateY(-48px) scale(.97)}
+.fr.on{opacity:1;transform:none}
+.fr .shot{max-width:100%;display:flex;box-shadow:0 30px 60px -30px rgba(0,0,0,.95)}
+.fr picture{display:contents}
+.fr img{max-width:100%;width:auto;height:auto;max-height:calc(min(660px,100vh - 120px) - 112px)}
+.fr-2 img{max-height:calc((min(660px,100vh - 120px) - 126px) / 2)}
+.stage-bar{flex:1;height:3px;border-radius:3px;background:var(--line)}
+.stage-bar i{display:block;height:100%;width:20%;border-radius:3px;background:var(--fern);transition:width .5s ease}
+@media (prefers-reduced-motion:reduce){.fr,.fr.past{transform:none;transition:opacity .2s}.st{transition:none}}
+@media (max-width:960px){
+  .story{grid-template-columns:1fr;gap:0}
+  .story-stage{display:none}
+  .story-steps{padding:0;gap:44px}
+  .st{min-height:0;padding-left:0}
+  .st::before{display:none}
+  .story.js .st{opacity:1}
+  .st-shot{display:flex}
+  .st-shot img{width:100%}
+}
+
 /* control bento */
 .bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0;overflow:hidden}
@@ -420,20 +464,58 @@ footer a:hover{color:var(--fg)}
       <div class="sec-head">
         <span class="eyebrow">How it works</span>
         <h2 id="how-h">One run, every morning, before your first meeting.</h2>
-        <p>Quickjobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. Here's a real run, step by step.</p>
+        <p>Quickjobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. Scroll through one real run.</p>
       </div>
-      <div class="run">
-        <ol class="steps" id="steps">
-          <li class="on"><time class="tab">9:10</time><div><h3>Checks you're signed in</h3><p>Before it reads anything, it checks each site. If one has signed you out, you hear about it first.</p><span class="out">6 of 6 sites signed in</span></div></li>
-          <li><time class="tab">9:10</time><div><h3>Reads only what's new</h3><p>Your saved searches on all six boards, newest first. It stops paging when it reaches jobs it has already seen.</p><span class="out">187 listings, 55 new since yesterday</span></div></li>
-          <li><time class="tab">9:15</time><div><h3>Filters, then scores</h3><p>Pay in lakhs, experience, cities and blocked companies first. Then each job that's left gets a 0–100 match score with a one-line reason.</p><span class="out">31 added, 19 filtered out</span></div></li>
-          <li><time class="tab">9:16</time><div><h3>Applies to the ones that clear your bar</h3><p>Clicks Apply and answers screening questions from your saved answers. A question it hasn't seen before waits for you instead.</p><span class="out">12 applied, 1 waiting for your answer</span></div></li>
-          <li><time class="tab">9:23</time><div><h3>Checks LinkedIn and your inbox</h3><p>Keeps hiring posts that match your roles and sorts recruiter replies, so an interview invite never sits unread.</p><span class="out">5 hiring posts, 3 recruiter emails</span></div></li>
+      <div class="story" id="story">
+        <ol class="story-steps">
+          <li class="st on" data-i="0">
+            <div class="st-meta"><time class="tab">9:10</time><span class="st-n tab">01</span></div>
+            <h3>Checks you're signed in</h3>
+            <p>Before it reads anything, it checks each of your sites. If one has signed you out, you hear about it first, not after a wasted run.</p>
+            <span class="out">6 of 6 sites signed in</span>
+            <figure class="st-shot"><div class="shot"><img src="shots/s1-signin.webp" width="1026" height="1000" alt="The run console: sign-ins checked on all six sites, then reading, scoring and applying, with a chip for each site." loading="lazy"></div></figure>
+          </li>
+          <li class="st" data-i="1">
+            <div class="st-meta"><time class="tab">9:10</time><span class="st-n tab">02</span></div>
+            <h3>Reads only what's new</h3>
+            <p>Your saved searches on all six boards, newest first. It stops paging the moment it reaches jobs it has already seen.</p>
+            <span class="out">187 listings, 55 new since yesterday</span>
+            <figure class="st-shot"><div class="shot"><img src="shots/s2-read.webp" width="1080" height="1932" alt="The Quickjobs popup: new jobs found on each job site this morning, plus LinkedIn posts and recruiter emails." loading="lazy"></div></figure>
+          </li>
+          <li class="st" data-i="2">
+            <div class="st-meta"><time class="tab">9:15</time><span class="st-n tab">03</span></div>
+            <h3>Filters, then scores</h3>
+            <p>Pay in lakhs, experience, cities and blocked companies go first. Every job left gets a 0–100 match score with a one-line reason.</p>
+            <span class="out">31 added, 19 filtered out</span>
+            <figure class="st-shot"><div class="shot"><picture><source media="(max-width:960px)" srcset="shots/s3-score-m.webp" width="1420" height="1040"><img src="shots/s3-score.webp" width="1956" height="1520" alt="The review queue: each job with its salary in lakhs, a match score out of 100 and the reason for it." loading="lazy"></picture></div></figure>
+          </li>
+          <li class="st" data-i="3">
+            <div class="st-meta"><time class="tab">9:16</time><span class="st-n tab">04</span></div>
+            <h3>Applies to the ones that clear your bar</h3>
+            <p>It clicks Apply and answers screening questions from your saved answers. A question it hasn't seen before waits for you instead of being guessed.</p>
+            <span class="out">12 applied, 1 waiting for your answer</span>
+            <figure class="st-shot"><div class="shot"><img src="shots/s4-apply.webp" width="1026" height="560" alt="The activity log while applying: applications sent one by one." loading="lazy"></div><div class="shot"><img src="shots/s4-ask.webp" width="1026" height="460" alt="A new screening question holding one application until you answer it." loading="lazy"></div></figure>
+          </li>
+          <li class="st" data-i="4">
+            <div class="st-meta"><time class="tab">9:23</time><span class="st-n tab">05</span></div>
+            <h3>Checks LinkedIn and your inbox</h3>
+            <p>It keeps hiring posts that match your roles and sorts recruiter replies, so an interview invite never sits unread under newsletters.</p>
+            <span class="out">5 hiring posts, 3 recruiter emails</span>
+            <figure class="st-shot"><div class="shot"><img src="shots/s5-mail.webp" width="1026" height="955" alt="A recruiter's interview invite, marked Needs you and linked to the application." loading="lazy"></div><div class="shot"><img src="shots/s5-post.webp" width="1026" height="860" alt="A LinkedIn hiring post with the poster's email, ready to email." loading="lazy"></div></figure>
+          </li>
         </ol>
-        <div class="run-shot">
-          <div class="shot"><picture><source media="(max-width:640px)" srcset="shots/console-m.webp" width="1026" height="1698"><img src="shots/console-live.webp" width="1608" height="568" alt="The run console while applying: steps with timings on the left, and a live activity log of applications on the right, with a Stop run button." loading="lazy"></picture></div>
-          <div class="shot hide-m"><img src="shots/console-done.webp" width="1608" height="680" alt="The finished run: every step done, a chip for each site with how many new jobs it had, and the activity log." loading="lazy"></div>
-          <p class="cap">The run console in your dashboard, during and after a run. Example data.</p>
+        <div class="story-stage" aria-hidden="true">
+          <div class="stage-in">
+            <div class="stage-head"><span class="live"><i></i>Your 9:10 run</span><span class="count tab"><b id="st-cur">01</b> / 05</span></div>
+            <div class="frames">
+            <div class="fr fr-1 on" data-i="0"><div class="shot"><img src="shots/s1-signin.webp" width="1026" height="1000" alt=""></div></div>
+            <div class="fr fr-1" data-i="1"><div class="shot"><img src="shots/s2-read.webp" width="1080" height="1932" alt="" loading="lazy"></div></div>
+            <div class="fr fr-1" data-i="2"><div class="shot"><picture><source media="(max-width:960px)" srcset="shots/s3-score-m.webp" width="1420" height="1040"><img src="shots/s3-score.webp" width="1956" height="1520" alt="" loading="lazy"></picture></div></div>
+            <div class="fr fr-2" data-i="3"><div class="shot"><img src="shots/s4-apply.webp" width="1026" height="560" alt="" loading="lazy"></div><div class="shot"><img src="shots/s4-ask.webp" width="1026" height="460" alt="" loading="lazy"></div></div>
+            <div class="fr fr-2" data-i="4"><div class="shot"><img src="shots/s5-mail.webp" width="1026" height="955" alt="" loading="lazy"></div><div class="shot"><img src="shots/s5-post.webp" width="1026" height="860" alt="" loading="lazy"></div></div>
+            </div>
+            <div class="stage-foot"><div class="stage-bar"><i id="st-bar"></i></div><span>Example data</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -685,17 +767,22 @@ footer a:hover{color:var(--fg)}
     window.__qjSyncBar = sync;
   }
 
-  // the morning run: highlight each step in turn while the section is on screen
-  const steps = $$('#steps li');
-  let idx = 0, timer = null;
-  const paint = () => steps.forEach((li, i) => li.classList.toggle('on', i <= idx));
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { idx = steps.length - 1; paint(); }
-  else if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([en]) => {
-      if (en.isIntersecting && !timer) { idx = 0; paint(); timer = setInterval(() => { idx = (idx + 1) % (steps.length + 2); if (idx >= steps.length) { paint(); return; } paint(); }, 1500); }
-      else if (!en.isIntersecting && timer) { clearInterval(timer); timer = null; idx = steps.length - 1; paint(); }
-    }, { threshold: .35 }).observe($('#steps'));
+  // how it works: the step crossing the middle of the screen is the one in focus, with its screenshot beside it
+  const story = $('#story');
+  if (story && 'IntersectionObserver' in window) {
+    const sts = $$('.st', story), frs = $$('.fr', story), cur = $('#st-cur'), bar = $('#st-bar');
+    let active = 0;
+    const set = (i) => {
+      if (i === active) return; active = i;
+      sts.forEach((el, k) => el.classList.toggle('on', k === i));
+      frs.forEach((el, k) => { el.classList.toggle('on', k === i); el.classList.toggle('past', k < i); });
+      if (cur) cur.textContent = String(i + 1).padStart(2, '0');
+      if (bar) bar.style.width = ((i + 1) / sts.length * 100) + '%';
+    };
+    story.classList.add('js');
+    const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(+e.target.dataset.i); }), { rootMargin: '-48% 0px -48% 0px' });
+    sts.forEach((el) => io2.observe(el));
+    frs.forEach((el, k) => { if (k > 0) el.querySelectorAll('img').forEach((im) => { im.loading = 'eager'; }); });
   }
 
   // referral code that brought this visitor: ?ref=CODE on the real site, #r-CODE in the preview
