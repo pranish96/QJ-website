@@ -131,10 +131,25 @@ img{max-width:100%;display:block;height:auto}
 @media (max-width:960px){.pop{left:-6px}.toast{right:-6px}}
 @media (max-width:560px){.stage{padding-bottom:40px}.pop{width:42%}.toast{display:none}.live .long{display:none}}
 
-.boards{margin-top:56px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding-top:26px;border-top:1px solid var(--line)}
-.boards small{color:var(--faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;flex-basis:100%}
-.boards span{font-family:var(--display);font-weight:600;font-size:1.25rem;color:var(--board);letter-spacing:-.01em}
-.boards span.plus{font-family:var(--body);font-weight:500;font-size:.92rem;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:4px 12px}
+.boards{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+@media (prefers-reduced-motion:no-preference){.boards{animation:boards-in .9s cubic-bezier(.2,.75,.2,1) .5s both}
+  @keyframes boards-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}}
+.boards-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--faint)}
+.boards-n{letter-spacing:.02em;text-transform:none;font-weight:500;color:var(--muted);font-size:.9rem}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.marq-track{display:flex;width:max-content}
+@media (prefers-reduced-motion:no-preference){.marq-track{animation:marq 70s linear infinite}.marq:hover .marq-track,.marq:focus-within .marq-track{animation-play-state:paused}
+  @keyframes marq{to{transform:translateX(-50%)}}}
+.marq-grp{list-style:none;margin:0;padding:0 14px 0 0;display:flex;gap:14px}
+.mq{display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border:1px solid var(--line-2);border-radius:16px;background:linear-gradient(180deg,var(--surface),var(--bg));white-space:nowrap;transition:border-color .25s,transform .25s}
+.mq:hover{border-color:var(--fern);transform:translateY(-2px)}
+.mono{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--sunk);border:1px solid var(--line-2);font-family:var(--display);font-weight:700;font-stretch:112%;font-size:1.15rem;color:var(--fern)}
+.mq-t{display:flex;flex-direction:column;line-height:1.2}
+.mq-t b{font-family:var(--display);font-weight:700;font-stretch:108%;font-size:1.2rem;color:var(--fg);letter-spacing:-.01em}
+.mq-t small{font-size:.8rem;color:var(--faint)}
+.mq.plus{border-style:dashed}
+.mq.plus .mono{color:var(--blue);font-size:1rem}
+@media (prefers-reduced-motion:reduce){.marq{-webkit-mask-image:none;mask-image:none}.marq-track{width:auto}.marq-grp{flex-wrap:wrap;padding:0}.marq-grp[aria-hidden]{display:none}}
 
 /* sections */
 section{padding-block:96px}
@@ -406,8 +421,9 @@ footer a:hover{color:var(--fg)}
   .win{display:none}
   .pop{position:static;width:min(82%,300px)}
   .toast{display:flex;position:static;width:100%;max-width:340px}
-  .boards{margin-top:36px;gap:10px 22px}
-  .boards span{font-size:1.1rem}
+  .boards{margin-top:36px}
+  .mono{width:38px;height:38px}
+  .mq-t b{font-size:1.05rem}
   section{padding-block:56px}
   .sec-head{gap:12px;margin-bottom:28px}
   .sec-head p{font-size:1.02rem}
@@ -515,9 +531,13 @@ footer a:hover{color:var(--fg)}
       </div>
 
       <div class="boards" aria-label="Where QuickJobs works">
-        <small>Reads and applies where Indian hiring happens</small>
-        <span>Naukri</span><span>iimjobs</span><span>Shine</span><span>Foundit</span><span>Hirist</span><span>Instahyre</span>
-        <span class="plus">+ LinkedIn hiring posts</span><span class="plus">+ recruiter replies in Gmail</span>
+        <div class="boards-h"><span class="live"><i></i>Reads and applies on</span><span class="boards-n">6 job boards, plus LinkedIn and Gmail</span></div>
+        <div class="marq">
+          <div class="marq-track">
+            <ul class="marq-grp"><li class="mq"><span class="mono">N</span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i</span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S</span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F</span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H</span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I</span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in</span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@</span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
+            <ul class="marq-grp" aria-hidden="true"><li class="mq"><span class="mono">N</span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i</span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S</span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F</span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H</span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I</span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in</span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@</span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
