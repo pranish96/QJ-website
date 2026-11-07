@@ -85,6 +85,11 @@ img{max-width:100%;display:block;height:auto}
 .btn-p:hover{background:var(--hover);transform:translateY(-1px)}
 .btn-p:active{transform:translateY(0)}
 .btn-s{height:42px;font-size:.95rem;padding:0 16px}
+.btn-o{background:transparent;color:var(--fern);border:1px solid rgba(79,191,134,.45)}
+.btn-o:hover{border-color:var(--fern);background:var(--fern-soft)}
+.nav-inst{gap:7px}
+.nav-inst svg{width:16px;height:16px}
+.nav-inst[aria-current]{background:var(--fern-soft);border-color:var(--fern)}
 .btn-g{background:transparent;color:var(--fg);border:1px solid var(--line-2)}
 .btn-g:hover{border-color:var(--fern)}
 .btn[disabled]{opacity:.7;cursor:progress}
@@ -481,8 +486,8 @@ footer a:hover{color:var(--fg)}
       <a class="lnk" href="#how">How it works</a>
       <a class="lnk" href="#control">Control</a>
       <a class="lnk" href="#privacy">Privacy</a>
-      <a class="lnk" href="install.html">Install</a>
       <a class="lnk" href="#faq">Questions</a>
+      <a class="btn btn-o btn-s nav-inst" href="install.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Install</a>
       <a class="btn btn-p btn-s" href="#top" data-focus-join>Join the waitlist</a>
     </div>
   </div>
