@@ -117,7 +117,7 @@ img{max-width:100%;display:block;height:auto}
 .lede b{color:var(--fg);font-weight:600}
 @media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:22px}}
 
-.stage{position:relative;min-width:0;margin-top:56px;perspective:1600px}
+.stage{position:relative;min-width:0;margin-top:40px;perspective:1600px}
 .stage::before{content:"";position:absolute;inset:8% 6% -6%;background:radial-gradient(60% 60% at 50% 40%,rgba(79,191,134,.28),transparent 70%);filter:blur(40px);z-index:-1}
 .win-img.dash-img{aspect-ratio:auto;position:relative}
 .dash-img img{display:block;width:100%;height:auto}
@@ -147,7 +147,7 @@ img{max-width:100%;display:block;height:auto}
 @media (max-width:960px){.pop{left:-6px}.toast{right:-6px}}
 @media (max-width:560px){.stage{padding-bottom:40px}.pop{width:42%}.toast{display:none}.live .long{display:none}}
 
-.boards{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+.boards{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
 @media (prefers-reduced-motion:no-preference){.boards{animation:boards-in .9s cubic-bezier(.2,.75,.2,1) .5s both}
   @keyframes boards-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}}
 .boards-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--faint)}
@@ -199,7 +199,7 @@ section{padding-block:96px}
 
 /* how it works: one step and one screenshot at a time */
 .story{display:grid;grid-template-columns:minmax(0,.66fr) minmax(0,1.34fr);gap:44px;align-items:start}
-.story-steps{list-style:none;margin:0;padding:16vh 0 16vh;display:flex;flex-direction:column}
+.story-steps{list-style:none;margin:0;padding:0 0 16vh;display:flex;flex-direction:column}
 .st{min-height:68vh;display:flex;flex-direction:column;justify-content:center;gap:12px;padding-left:28px;position:relative;transition:opacity .45s ease}
 .st::before{content:"";position:absolute;left:0;top:calc(50% - 60px);height:120px;width:2px;border-radius:2px;background:var(--line-2);transition:background .45s}
 .st-meta{display:flex;align-items:center;gap:12px}
@@ -212,13 +212,15 @@ section{padding-block:96px}
 .story.js .st{opacity:.28}
 .story.js .st.on{opacity:1}
 .story.js .st.on::before{background:var(--fern)}
-.story-stage{position:sticky;top:0;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
-.stage-in{display:flex;flex-direction:column;gap:12px;border:1px solid var(--line-2);border-radius:22px;padding:12px 12px 14px;
+.story-stage{position:sticky;top:var(--stt,96px)}
+.story-l .sec-head{margin-bottom:8px}
+.st:first-child{min-height:0;padding-top:28px;padding-bottom:12vh}
+.stage-in{display:flex;flex-direction:column;gap:0;border:0;border-radius:0;padding:0;
   background:radial-gradient(70% 60% at 70% 0%,rgba(79,191,134,.14),transparent 70%),radial-gradient(60% 60% at 0% 100%,rgba(52,86,200,.12),transparent 70%),var(--surface);
-  box-shadow:0 50px 90px -50px var(--shadow)}
+  background:none!important;box-shadow:none}
 .stage-head,.stage-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.85rem;color:var(--faint)}
 .stage-foot .count{color:var(--muted)}.stage-foot .count b{color:var(--fg);font-family:var(--display)}
-.frames{position:relative;width:100%;aspect-ratio:16/11;max-height:calc(100vh - 150px);margin:-4px 0}
+.frames{position:relative;width:100%;aspect-ratio:16/11;max-height:calc(100vh - 120px)}
 .fr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;
   transform:translateY(48px) scale(.97);transition:opacity .5s ease,transform .7s cubic-bezier(.2,.75,.2,1);pointer-events:none}
 .fr.past{transform:translateY(-48px) scale(.97)}
@@ -529,6 +531,16 @@ footer a:hover{color:var(--fg)}
         </div>
       </div>
 
+      <div class="boards" aria-label="Where QuickJobs works">
+        <div class="boards-h"><span class="live"><i></i>Reads and applies on</span><span class="boards-n">6 job boards, plus LinkedIn and Gmail</span></div>
+        <div class="marq">
+          <div class="marq-track">
+            <ul class="marq-grp"><li class="mq"><span class="mono">N<img src="shots/logos/naukri.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i<img src="shots/logos/iimjobs.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S<img src="shots/logos/shine.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F<img src="shots/logos/foundit.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H<img src="shots/logos/hirist.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I<img src="shots/logos/instahyre.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in<img src="shots/logos/linkedin.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@<img src="shots/logos/gmail.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
+            <ul class="marq-grp" aria-hidden="true"><li class="mq"><span class="mono">N<img src="shots/logos/naukri.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i<img src="shots/logos/iimjobs.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S<img src="shots/logos/shine.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F<img src="shots/logos/foundit.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H<img src="shots/logos/hirist.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I<img src="shots/logos/instahyre.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in<img src="shots/logos/linkedin.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@<img src="shots/logos/gmail.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
+          </div>
+        </div>
+      </div>
+
       <div class="stage">
         <div class="win">
           <div class="win-bar">
@@ -542,15 +554,6 @@ footer a:hover{color:var(--fg)}
         </div>
       </div>
 
-      <div class="boards" aria-label="Where QuickJobs works">
-        <div class="boards-h"><span class="live"><i></i>Reads and applies on</span><span class="boards-n">6 job boards, plus LinkedIn and Gmail</span></div>
-        <div class="marq">
-          <div class="marq-track">
-            <ul class="marq-grp"><li class="mq"><span class="mono">N<img src="shots/logos/naukri.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i<img src="shots/logos/iimjobs.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S<img src="shots/logos/shine.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F<img src="shots/logos/foundit.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H<img src="shots/logos/hirist.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I<img src="shots/logos/instahyre.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in<img src="shots/logos/linkedin.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@<img src="shots/logos/gmail.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
-            <ul class="marq-grp" aria-hidden="true"><li class="mq"><span class="mono">N<img src="shots/logos/naukri.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i<img src="shots/logos/iimjobs.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S<img src="shots/logos/shine.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F<img src="shots/logos/foundit.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H<img src="shots/logos/hirist.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I<img src="shots/logos/instahyre.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in<img src="shots/logos/linkedin.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@<img src="shots/logos/gmail.webp" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -570,12 +573,13 @@ footer a:hover{color:var(--fg)}
 
   <section class="gut" id="how" aria-labelledby="how-h">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">How it works</span>
-        <h2 id="how-h">One run a day, finished before your chai.</h2>
-        <p>QuickJobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. Scroll through one real run.</p>
-      </div>
       <div class="story" id="story">
+        <div class="story-l">
+        <div class="sec-head">
+          <span class="eyebrow">How it works</span>
+          <h2 id="how-h">One run a day, finished before your chai.</h2>
+          <p>QuickJobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. Scroll through one real run.</p>
+        </div>
         <ol class="story-steps">
           <li class="st on" data-i="0">
             <div class="st-meta"><span class="dur tab">20 sec</span><span class="st-n tab">01</span></div>
@@ -613,6 +617,7 @@ footer a:hover{color:var(--fg)}
             <figure class="st-shot"><div class="shot"><img src="shots/s5-mail.webp" width="1026" height="955" alt="A recruiter's interview invite, marked Needs you and linked to the application." loading="lazy"></div><div class="shot"><img src="shots/s5-post.webp" width="1026" height="860" alt="A LinkedIn hiring post with the poster's email, ready to email." loading="lazy"></div></figure>
           </li>
         </ol>
+        </div>
         <div class="story-stage" aria-hidden="true">
           <div class="stage-in">
             <div class="frames">
@@ -622,7 +627,6 @@ footer a:hover{color:var(--fg)}
             <div class="fr" data-i="3"><img src="shots/f4-apply.webp" width="1600" height="1100" alt="" loading="lazy"></div>
             <div class="fr" data-i="4"><img src="shots/f5-inbox.webp" width="1600" height="1100" alt="" loading="lazy"></div>
             </div>
-            <div class="stage-foot"><span class="count tab"><b id="st-cur">01</b> / 05</span><div class="stage-bar"><i id="st-bar"></i></div><span>Example data</span></div>
           </div>
         </div>
       </div>
@@ -775,13 +779,13 @@ footer a:hover{color:var(--fg)}
         <p>Something else on your mind? Write to <span class="copy">quickjobsbeta@gmail.com</span></p>
       </div>
       <div>
-        <details open><summary>Will my current employer find out?</summary><p>QuickJobs never applies to your current company: it's added to your blocked list from your profile, and you can add others. It doesn't change your profiles or visibility settings on any job site; those stay as you set them.</p></details>
-        <details><summary>Is it safe for my Naukri account?</summary><p>It applies as you, from your own Chrome, at a person's pace and within daily limits you set. It stops at any "verify you're human" check instead of trying to get past it. Job sites set their own rules about automated tools, so we keep limits conservative and you can lower them any time.</p></details>
-        <details><summary>Do I need to keep my laptop on?</summary><p>Chrome needs to be running at the run time you choose. If your laptop was asleep, the run catches up when Chrome opens, and you get an email if a run is missed.</p></details>
-        <details><summary>What does it cost?</summary><p>Weekly plans, priced in rupees, with a cheaper monthly option. Prices are announced before launch. Early users from the waitlist get their first 30 days free.</p></details>
-        <details><summary>What does the AI see?</summary><p>To score a job, QuickJobs sends the job description and your target roles, title, experience, skills, cities and expected pay to its AI provider. Your phone number, current pay, date of birth and gender are never sent. Reading your CV to fill in setup is optional.</p></details>
-        <details><summary>Can I approve every job myself instead?</summary><p>Yes. That's the default. Apply without asking me is a switch you turn on when you're ready, and you can turn it off any day.</p></details>
-        <details><summary>What do I need?</summary><p>Chrome on a Windows, Mac or Linux computer, and accounts on the job sites you want searched. Phones aren't supported yet.</p></details>
+        <details name="faq" open><summary>Will my current employer find out?</summary><p>QuickJobs never applies to your current company: it's added to your blocked list from your profile, and you can add others. It doesn't change your profiles or visibility settings on any job site; those stay as you set them.</p></details>
+        <details name="faq"><summary>Is it safe for my Naukri account?</summary><p>It applies as you, from your own Chrome, at a person's pace and within daily limits you set. It stops at any "verify you're human" check instead of trying to get past it. Job sites set their own rules about automated tools, so we keep limits conservative and you can lower them any time.</p></details>
+        <details name="faq"><summary>Do I need to keep my laptop on?</summary><p>Chrome needs to be running at the run time you choose. If your laptop was asleep, the run catches up when Chrome opens, and you get an email if a run is missed.</p></details>
+        <details name="faq"><summary>What does it cost?</summary><p>Weekly plans, priced in rupees, with a cheaper monthly option. Prices are announced before launch. Early users from the waitlist get their first 30 days free.</p></details>
+        <details name="faq"><summary>What does the AI see?</summary><p>To score a job, QuickJobs sends the job description and your target roles, title, experience, skills, cities and expected pay to its AI provider. Your phone number, current pay, date of birth and gender are never sent. Reading your CV to fill in setup is optional.</p></details>
+        <details name="faq"><summary>Can I approve every job myself instead?</summary><p>Yes. That's the default. Apply without asking me is a switch you turn on when you're ready, and you can turn it off any day.</p></details>
+        <details name="faq"><summary>What do I need?</summary><p>Chrome on a Windows, Mac or Linux computer, and accounts on the job sites you want searched. Phones aren't supported yet.</p></details>
       </div>
     </div>
   </section>
@@ -883,6 +887,9 @@ footer a:hover{color:var(--fg)}
     window.__qjSyncBar = sync;
   }
 
+  // FAQ: opening one question closes the others (for browsers without <details name>)
+  $$('details[name="faq"]').forEach((d, _, all) => d.addEventListener('toggle', () => { if (d.open) all.forEach((o) => { if (o !== d) o.open = false; }); }));
+
   // how it works: the step crossing the middle of the screen is the one in focus, with its screenshot beside it
   const story = $('#story');
   if (story && 'IntersectionObserver' in window) {
@@ -896,6 +903,9 @@ footer a:hover{color:var(--fg)}
       if (bar) bar.style.width = ((i + 1) / sts.length * 100) + '%';
     };
     story.classList.add('js');
+    // keep the screenshot centred on screen once it sticks, so the step in focus lines up with it
+    const stg = $('.story-stage', story), place = () => { if (stg) story.style.setProperty('--stt', Math.max(84, (innerHeight - stg.offsetHeight) / 2) + 'px'); };
+    place(); addEventListener('resize', place); addEventListener('load', place);
     const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(+e.target.dataset.i); }), { rootMargin: '-48% 0px -48% 0px' });
     sts.forEach((el) => io2.observe(el));
     frs.forEach((el, k) => { if (k > 0) el.querySelectorAll('img').forEach((im) => { im.loading = 'eager'; }); });
