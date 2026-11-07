@@ -3,13 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta property="og:title" content="Quickjobs: wake up to job applications already sent">
-<meta property="og:description" content="Searches and applies on Naukri, iimjobs, Shine, Foundit, Hirist and Instahyre every morning, from your own Chrome.">
-<title>Quickjobs</title>
-<meta name="description" content="Quickjobs searches Naukri, iimjobs, Shine, Foundit, Hirist and Instahyre every morning and applies to the best jobs for you, from your own Chrome. Join the waitlist.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+<meta property="og:title" content="QuickJobs: wake up to job applications already sent">
+<meta property="og:description" content="Searches and applies on Naukri, iimjobs, Shine, Foundit, Hirist and Instahyre every day with AI, from your own Chrome.">
+<title>QuickJobs</title>
+<meta name="description" content="QuickJobs searches Naukri, iimjobs, Shine, Foundit, Hirist and Instahyre every day, scores every job with AI and applies to the best ones for you, from your own Chrome. Join the waitlist.">
+<style>
+/* fonts are served from this site: no requests to Google or any other third party */
+@font-face{font-family:"Anek Latin";font-style:normal;font-weight:100 800;font-stretch:75% 125%;font-display:swap;src:url(fonts/anek-latin.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/public-sans-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/public-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/public-sans-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/public-sans-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/public-sans-latin-ext-600-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/public-sans-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>
 <script>
 // Waitlist goes to the live Supabase project (migration 27). The publishable key only allows what
 // row-level security and the two waitlist functions allow. Set "site" to the real address once the domain exists.
@@ -25,7 +32,7 @@ window.QJ_CFG = { url: "https://igaryftppmiybqhywkwb.supabase.co", key: "sb_publ
   --fern:#4fbf86; --fern-ink:#04140b; --fern-soft:rgba(79,191,134,.12); --hover:#5fd197;
   --amber:#ffb26b; --blue:#7aa7ff; --forest:#2e6b3f;
   --glass:rgba(15,27,22,.86); --board:#c9d6cc; --err:#ff9b8f; --shadow:var(--shadow); --aurora:.6;
-  --display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --display:"Anek Latin","Helvetica Neue",Arial,sans-serif;
   --body:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --r:14px; --r-sm:10px;
   --w:1180px;
@@ -41,6 +48,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
 .gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:var(--w);margin:0 auto}
+h1,h2{font-stretch:112%}
 h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.08;margin:0;text-wrap:balance}
 h2{font-size:clamp(2rem,4.2vw,3.25rem)}
 h3{font-size:1.2rem;letter-spacing:-.01em;line-height:1.25}
@@ -61,13 +69,15 @@ img{max-width:100%;display:block;height:auto}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
 .nav.scrolled{border-bottom-color:var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
-.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--fg);text-decoration:none;letter-spacing:-.01em}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-stretch:112%;font-size:1.2rem;color:var(--fg);text-decoration:none;letter-spacing:-.01em}
 .logo svg{width:30px;height:30px;flex:none}
 .badge{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--fern);background:var(--fern-soft);border:1px solid rgba(79,191,134,.25);padding:3px 8px;border-radius:999px;font-family:var(--body)}
 .nav-r{display:flex;align-items:center;gap:22px}
 .nav-r a.lnk{color:var(--muted);text-decoration:none;font-size:.95rem}
 .nav-r a.lnk:hover{color:var(--fg)}
-@media (max-width:640px){.nav-r a.lnk,.logo .badge{display:none}}
+.badge,.nav-r a.lnk{white-space:nowrap}
+@media (max-width:1040px){.nav-r a.lnk{display:none}}
+@media (max-width:640px){.logo .badge{display:none}}
 
 /* buttons and form */
 .btn{appearance:none;border:0;cursor:pointer;font:600 1rem/1 var(--display);letter-spacing:-.005em;border-radius:12px;padding:0 20px;height:52px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;white-space:nowrap;transition:transform .15s,background .15s,box-shadow .15s}
@@ -163,7 +173,7 @@ section{padding-block:96px}
 .st{min-height:68vh;display:flex;flex-direction:column;justify-content:center;gap:12px;padding-left:28px;position:relative;transition:opacity .45s ease}
 .st::before{content:"";position:absolute;left:0;top:calc(50% - 60px);height:120px;width:2px;border-radius:2px;background:var(--line-2);transition:background .45s}
 .st-meta{display:flex;align-items:center;gap:12px}
-.st time{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--fern);background:var(--fern-soft);border-radius:8px;padding:3px 10px}
+.st .dur{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--fern);background:var(--fern-soft);border-radius:8px;padding:3px 10px}
 .st-n{font-family:var(--display);font-weight:600;font-size:.85rem;color:var(--faint);letter-spacing:.06em}
 .st h3{font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.02em}
 .st p{color:var(--muted);font-size:1.06rem;max-width:30em}
@@ -238,7 +248,7 @@ section{padding-block:96px}
 @media (max-width:960px){.pipe{grid-template-columns:1fr}}
 
 /* trust */
-.trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .trust div{padding:24px;border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
 .trust p{color:var(--muted);font-size:.96rem}
 @media (max-width:1000px){.trust{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -308,6 +318,8 @@ footer a:hover{color:var(--fg)}
 .sw{width:44px;height:26px;border-radius:999px;background:var(--fern);position:relative;flex:none}
 .sw::after{content:"";position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff}
 .meter{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.meter i{display:block;height:100%;background:var(--fern);border-radius:99px}
+.ctl .scale{margin-top:-4px}
+.ctl .scale small:last-child{color:var(--fern)}
 .chipx{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line-2);font-size:.9rem;color:var(--fg)}
 .chipx em{font-style:normal;font-size:.75rem;color:var(--amber)}
 .chipx.add{color:var(--faint);border-style:dashed}
@@ -382,20 +394,21 @@ footer a:hover{color:var(--fg)}
 
 <header class="nav gut" id="nav">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Quickjobs home">
+    <a class="logo" href="#top" aria-label="QuickJobs home">
       <svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="8" fill="#4fbf86"/><path d="M16.6 5.5 8.6 16.3h5.9l-1 8.2 8.4-10.9h-6l.7-8.1Z" fill="#fff"/></svg>
-      Quickjobs <span class="badge">Early access</span>
+      QuickJobs <span class="badge">Early access</span>
     </a>
     <div class="nav-r">
       <a class="lnk" href="#how">How it works</a>
       <a class="lnk" href="#control">Control</a>
+      <a class="lnk" href="#privacy">Privacy</a>
       <a class="lnk" href="#faq">Questions</a>
       <a class="btn btn-p btn-s" href="#top" data-focus-join>Join the waitlist</a>
     </div>
   </div>
 </header>
 
-<div class="mbar" id="mbar" aria-hidden="true"><span><b>Early access is open</b>30 days free for founding members</span><a class="btn btn-p btn-s" href="#top" data-focus-join tabindex="-1">Join the waitlist</a></div>
+<div class="mbar" id="mbar" aria-hidden="true"><span><b>Early access is open</b>30 days free for early users</span><a class="btn btn-p btn-s" href="#top" data-focus-join tabindex="-1">Join the waitlist</a></div>
 
 <main id="top">
   <div class="hero gut">
@@ -403,9 +416,9 @@ footer a:hover{color:var(--fg)}
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-copy">
-          <span class="pill"><i></i>Built for working professionals in India</span>
+          <span class="pill"><i></i>An AI job agent for working professionals in India</span>
           <h1>Wake up to job applications <em>already sent.</em></h1>
-          <p class="lede">Every morning at 9:10, Quickjobs reads <b>Naukri, iimjobs, Shine, Foundit, Hirist and Instahyre</b>, scores every new job against your profile, and applies to the best ones from your own Chrome. Hands-free when you want it. Your rules, always.</p>
+          <p class="lede">Every day, at a time you choose, QuickJobs reads <b>Naukri, iimjobs, Shine, Foundit, Hirist and Instahyre</b>, uses AI to score every new job against your profile, and applies to the best ones from your own Chrome. Hands-free when you want it. Your rules, always.</p>
           <div class="joinbox" data-join="hero">
             <form class="join" novalidate>
               <label class="sr" for="email-hero">Work or personal email</label>
@@ -414,7 +427,7 @@ footer a:hover{color:var(--fg)}
             </form>
             <p class="err" role="alert" aria-live="polite"></p>
             <div class="ticks">
-              <span><svg><use href="#i-check"/></svg>Founding members get 30 days free</span>
+              <span><svg><use href="#i-check"/></svg>Early users get 30 days free</span>
               <span><svg><use href="#i-check"/></svg>No card needed</span>
               <span><svg><use href="#i-check"/></svg>One email when your invite is ready</span>
             </div>
@@ -424,20 +437,20 @@ footer a:hover{color:var(--fg)}
         <div class="stage">
           <div class="win">
             <div class="win-bar">
-              <b><svg><use href="#i-bolt"/></svg>Your jobs this morning</b>
-              <span class="live"><i></i>9:10 run<span class="long">&nbsp;finished</span> · 31 new</span>
+              <b><svg><use href="#i-bolt"/></svg>Today's new jobs</b>
+              <span class="live"><i></i>Run<span class="long">&nbsp;finished</span> · 31 new</span>
             </div>
-            <div class="win-img"><img src="shots/queue.webp" width="1608" height="1490" alt="The Quickjobs review queue: each new job with its site, company, city, salary in lakhs, a match score out of 100 and a one-line reason, with Approve and Skip buttons." fetchpriority="high"></div>
+            <div class="win-img"><img src="shots/queue.webp" width="1608" height="1490" alt="The QuickJobs review queue: each new job with its site, company, city, salary in lakhs, a match score out of 100 and a one-line reason, with Approve and Skip buttons." fetchpriority="high"></div>
           </div>
-          <div class="pop"><img src="shots/popup.webp" width="720" height="1288" alt="The Quickjobs Chrome popup after a run: new jobs found on each of the six job sites, LinkedIn and Gmail." loading="lazy"></div>
+          <div class="pop"><img src="shots/popup.webp" width="720" height="1288" alt="The QuickJobs Chrome popup after a run: new jobs found on each of the six job sites, LinkedIn and Gmail." loading="lazy"></div>
           <div class="toast" aria-hidden="true">
             <span class="ck"><svg><use href="#i-check"/></svg></span>
-            <p><b>Applied: Senior Analyst, Growth</b>Tidewater Commerce · ₹28–38 L · while you were in a meeting</p>
+            <p><b>Applied: Senior Analyst, Growth</b>Tidewater Commerce · ₹28–38 LPA · while you were busy</p>
           </div>
         </div>
       </div>
 
-      <div class="boards" aria-label="Where Quickjobs works">
+      <div class="boards" aria-label="Where QuickJobs works">
         <small>Reads and applies where Indian hiring happens</small>
         <span>Naukri</span><span>iimjobs</span><span>Shine</span><span>Foundit</span><span>Hirist</span><span>Instahyre</span>
         <span class="plus">+ LinkedIn hiring posts</span><span class="plus">+ recruiter replies in Gmail</span>
@@ -452,9 +465,9 @@ footer a:hover{color:var(--fg)}
         <h2 id="pain-h">Six sites. Six logins. The same CTC question, six times.</h2>
       </div>
       <div class="pain">
-        <div><span class="n tab">6</span><h3>Job boards to check, every evening</h3><p>The roles you want are spread across Naukri, iimjobs, Instahyre and three more. Each has its own search, its own filters and the same old listings.</p></div>
-        <div><span class="n tab">₹ L</span><h3>Forms that ask the same things</h3><p>Current CTC, fixed and variable, expected CTC, notice period, buyout, relocation. Typed again on every application.</p></div>
-        <div><span class="n tab">Day 1</span><h3>Early applicants get read first</h3><p>By the time you get to a role on the weekend, it has been open for days. Quickjobs checks every morning, so you're early every time.</p></div>
+        <div><span class="n tab">6</span><h3>Job boards to check, every single day</h3><p>The roles you want are spread across Naukri, iimjobs, Instahyre and three more. Each has its own search, its own filters and the same old listings.</p></div>
+        <div><span class="n tab">6×</span><h3>Forms that ask the same things</h3><p>Current CTC, fixed and variable, expected CTC, notice period, buyout, relocation. Typed again on every application.</p></div>
+        <div><span class="n tab">Day 1</span><h3>Early applicants get read first</h3><p>By the time you get to a role on the weekend, it has been open for days. QuickJobs checks every day, so you're among the first to apply.</p></div>
       </div>
     </div>
   </section>
@@ -463,43 +476,43 @@ footer a:hover{color:var(--fg)}
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">How it works</span>
-        <h2 id="how-h">One run, every morning, before your first meeting.</h2>
-        <p>Quickjobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. Scroll through one real run.</p>
+        <h2 id="how-h">One run a day, finished before your chai.</h2>
+        <p>QuickJobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. Scroll through one real run.</p>
       </div>
       <div class="story" id="story">
         <ol class="story-steps">
           <li class="st on" data-i="0">
-            <div class="st-meta"><time class="tab">9:10</time><span class="st-n tab">01</span></div>
+            <div class="st-meta"><span class="dur tab">20 sec</span><span class="st-n tab">01</span></div>
             <h3>Checks you're signed in</h3>
             <p>Before it reads anything, it checks each of your sites. If one has signed you out, you hear about it first, not after a wasted run.</p>
             <span class="out">6 of 6 sites signed in</span>
             <figure class="st-shot"><div class="shot"><img src="shots/s1-signin.webp" width="1026" height="1000" alt="The run console: sign-ins checked on all six sites, then reading, scoring and applying, with a chip for each site." loading="lazy"></div></figure>
           </li>
           <li class="st" data-i="1">
-            <div class="st-meta"><time class="tab">9:10</time><span class="st-n tab">02</span></div>
+            <div class="st-meta"><span class="dur tab">5 min</span><span class="st-n tab">02</span></div>
             <h3>Reads only what's new</h3>
             <p>Your saved searches on all six boards, newest first. It stops paging the moment it reaches jobs it has already seen.</p>
             <span class="out">187 listings, 55 new since yesterday</span>
-            <figure class="st-shot"><div class="shot"><img src="shots/s2-read.webp" width="1080" height="1932" alt="The Quickjobs popup: new jobs found on each job site this morning, plus LinkedIn posts and recruiter emails." loading="lazy"></div></figure>
+            <figure class="st-shot"><div class="shot"><img src="shots/s2-read.webp" width="1080" height="1932" alt="The QuickJobs popup: new jobs found on each job site today, plus LinkedIn posts and recruiter emails." loading="lazy"></div></figure>
           </li>
           <li class="st" data-i="2">
-            <div class="st-meta"><time class="tab">9:15</time><span class="st-n tab">03</span></div>
-            <h3>Filters, then scores</h3>
-            <p>Pay in lakhs, experience, cities and blocked companies go first. Every job left gets a 0–100 match score with a one-line reason.</p>
+            <div class="st-meta"><span class="dur tab">20 sec</span><span class="st-n tab">03</span></div>
+            <h3>Filters, then AI scores</h3>
+            <p>Pay in lakhs, experience, cities and blocked companies go first. AI then gives every job left a 0–100 match score with a one-line reason, so the best fits rise to the top.</p>
             <span class="out">31 added, 19 filtered out</span>
             <figure class="st-shot"><div class="shot"><picture><source media="(max-width:960px)" srcset="shots/s3-score-m.webp" width="1420" height="1040"><img src="shots/s3-score.webp" width="1956" height="1520" alt="The review queue: each job with its salary in lakhs, a match score out of 100 and the reason for it." loading="lazy"></picture></div></figure>
           </li>
           <li class="st" data-i="3">
-            <div class="st-meta"><time class="tab">9:16</time><span class="st-n tab">04</span></div>
+            <div class="st-meta"><span class="dur tab">7 min</span><span class="st-n tab">04</span></div>
             <h3>Applies to the ones that clear your bar</h3>
-            <p>It clicks Apply and answers screening questions from your saved answers. A question it hasn't seen before waits for you instead of being guessed.</p>
+            <p>It clicks Apply and fills screening questions from your saved answers. AI writes answers to open questions like "Why this role?" from your profile. A fact it can't know, like a notice-period buyout, waits for you instead of being guessed.</p>
             <span class="out">12 applied, 1 waiting for your answer</span>
             <figure class="st-shot"><div class="shot"><img src="shots/s4-apply.webp" width="1026" height="560" alt="The activity log while applying: applications sent one by one." loading="lazy"></div><div class="shot"><img src="shots/s4-ask.webp" width="1026" height="460" alt="A new screening question holding one application until you answer it." loading="lazy"></div></figure>
           </li>
           <li class="st" data-i="4">
-            <div class="st-meta"><time class="tab">9:23</time><span class="st-n tab">05</span></div>
+            <div class="st-meta"><span class="dur tab">1 min</span><span class="st-n tab">05</span></div>
             <h3>Checks LinkedIn and your inbox</h3>
-            <p>It keeps hiring posts that match your roles and sorts recruiter replies, so an interview invite never sits unread under newsletters.</p>
+            <p>It keeps hiring posts that match your roles, and AI sorts recruiter replies so an interview invite never sits unread under newsletters.</p>
             <span class="out">5 hiring posts, 3 recruiter emails</span>
             <figure class="st-shot"><div class="shot"><img src="shots/s5-mail.webp" width="1026" height="955" alt="A recruiter's interview invite, marked Needs you and linked to the application." loading="lazy"></div><div class="shot"><img src="shots/s5-post.webp" width="1026" height="860" alt="A LinkedIn hiring post with the poster's email, ready to email." loading="lazy"></div></figure>
           </li>
@@ -525,7 +538,7 @@ footer a:hover{color:var(--fg)}
       <div class="sec-head">
         <span class="eyebrow">Hands-free, never out of your hands</span>
         <h2 id="control-h">Let it apply for you. Decide exactly where it stops.</h2>
-        <p>Turn on <b style="color:var(--fg)">Apply without asking me</b> and Quickjobs sends applications on its own, but only for jobs that pass your filters and score above your minimum. Everything else waits for one tap.</p>
+        <p>Turn on <b style="color:var(--fg)">Apply without asking me</b> and QuickJobs sends applications on its own, but only for jobs that pass your filters and score above your minimum. Everything else waits for one tap.</p>
       </div>
       <div class="bento">
         <div class="card c-wide">
@@ -537,14 +550,14 @@ footer a:hover{color:var(--fg)}
         <div class="card c-mid">
           <span class="ico"><svg><use href="#i-ban"/></svg></span>
           <h3>Your current employer is blocked for you</h3>
-          <p>Switching quietly? Quickjobs never applies to your current company, or to any company you add.</p>
+          <p>Switching quietly? QuickJobs never applies to your current company, or to any company you add.</p>
           <div class="ctl" aria-label="Example blocked companies"><small>Blocked companies</small><div class="chips"><span class="chipx">Larkspur Retail <em>your employer</em></span><span class="chipx add">+ Add a company</span></div></div>
         </div>
         <div class="card c-half">
           <span class="ico"><svg><use href="#i-hand"/></svg></span>
           <h3>Hands-free above your score. One tap below it.</h3>
-          <p>Set the minimum match. Jobs above it go out on their own; the rest sit in your queue with Approve and Skip.</p>
-          <div class="ctl" aria-label="Example: apply without asking, for jobs scoring 80 or more"><div class="row"><span><b>Apply without asking me</b><small>Jobs scoring 80+ go out on their own</small></span><span class="sw" aria-hidden="true"></span></div><div class="row"><span>Lowest score to apply</span><b class="tab">80 / 100</b></div><div class="meter"><i style="width:80%"></i></div></div>
+          <p>Set the minimum match. Jobs above it go out on their own; the rest wait in your queue. A lower minimum sends more applications, but more of them will be weak fits. A higher one sends fewer, stronger ones.</p>
+          <div class="ctl" aria-label="Example: apply without asking, for jobs scoring 80 or more"><div class="row"><span><b>Apply without asking me</b><small>Jobs scoring 80+ go out on their own</small></span><span class="sw" aria-hidden="true"></span></div><div class="row"><span>Lowest score to apply</span><b class="tab">80 / 100</b></div><div class="meter"><i style="width:80%"></i></div><div class="row scale"><small>More applications</small><small>Better matches</small></div></div>
         </div>
         <div class="card c-half">
           <span class="ico"><svg><use href="#i-gauge"/></svg></span>
@@ -568,7 +581,7 @@ footer a:hover{color:var(--fg)}
         </div>
         <div class="card c-third">
           <span class="ico"><svg><use href="#i-laptop"/></svg></span>
-          <h3>Laptop asleep at 9:10?</h3>
+          <h3>Laptop asleep at run time?</h3>
           <p>The run catches up when Chrome opens. Miss one and you get an email reminder.</p>
         </div>
       </div>
@@ -581,7 +594,7 @@ footer a:hover{color:var(--fg)}
         <div class="sec-head" style="margin-bottom:0">
           <span class="eyebrow">Made for Indian application forms</span>
           <h2 id="forms-h">Fluent in CTC, notice periods and lakhs.</h2>
-          <p>Global auto-apply tools mostly skip Indian job boards. Quickjobs is built around them and the questions their forms ask.</p>
+          <p>Global auto-apply tools mostly skip Indian job boards. QuickJobs is built around them and the questions their forms ask.</p>
         </div>
         <ul>
           <li><svg><use href="#i-check"/></svg><span><b>Pay the way Indian forms ask it.</b> Fixed and variable split, total CTC and expected CTC, in lakhs a year.</span></li>
@@ -592,8 +605,8 @@ footer a:hover{color:var(--fg)}
       </div>
       <div class="formcard" aria-label="Example of a screening form filled from your answers">
         <header><b>Screening questions · Lead Product Analyst</b><span>Naukri</span></header>
-        <div class="q"><label>Current CTC (fixed + variable)</label><span class="a"><span class="v">₹24 L</span></span><small>21 + 3, from your profile</small></div>
-        <div class="q"><label>Expected CTC</label><span class="a"><span class="v">₹34 L</span></span><small>From your profile</small></div>
+        <div class="q"><label>Current CTC (fixed + variable)</label><span class="a"><span class="v">₹24 LPA</span></span><small>21 + 3, from your profile</small></div>
+        <div class="q"><label>Expected CTC</label><span class="a"><span class="v">₹34 LPA</span></span><small>From your profile</small></div>
         <div class="q"><label>Notice period</label><span class="a"><span class="v">60 days, negotiable</span></span><small>Saved answer</small></div>
         <div class="q"><label>Willing to relocate to Pune?</label><span class="a"><span class="v">Yes</span></span><small>Pune is on your list</small></div>
         <div class="q wait"><label>Have you led a pricing experiment end to end?</label><span class="a"><span class="v">Waiting for you</span></span><small>New question: asked once, then saved</small></div>
@@ -617,17 +630,20 @@ footer a:hover{color:var(--fg)}
     </div>
   </section>
 
-  <section class="gut" aria-labelledby="trust-h">
+  <section class="gut" id="privacy" aria-labelledby="trust-h">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow">Your search stays yours</span>
-        <h2 id="trust-h">It applies as you. It never acts like it owns your accounts.</h2>
+        <span class="eyebrow">Privacy first</span>
+        <h2 id="trust-h">Your job search is sensitive. QuickJobs is built to keep it private.</h2>
+        <p>You're trusting us with your CV, your pay and the fact that you're looking. This is exactly how that data is handled.</p>
       </div>
       <div class="trust">
-        <div><span class="ico"><svg><use href="#i-key"/></svg></span><h3>No passwords, ever</h3><p>We never ask for your job-site, Gmail or LinkedIn passwords. It uses the sessions you're already signed in to in Chrome.</p></div>
-        <div><span class="ico"><svg><use href="#i-laptop"/></svg></span><h3>Personal details stay on your computer</h3><p>Your CV, phone number and current pay are kept in your Chrome, not on our server.</p></div>
-        <div><span class="ico"><svg><use href="#i-in"/></svg></span><h3>Stored in India, never sold</h3><p>Your data is stored in India and never sold. Delete your account and everything goes.</p></div>
-        <div><span class="ico"><svg><use href="#i-shield"/></svg></span><h3>Stops instead of pushing through</h3><p>A "verify you're human" check, a closed job or an unfamiliar form: it stops and tells you. It never creates accounts or pays for anything.</p></div>
+        <div><span class="ico"><svg><use href="#i-key"/></svg></span><h3>No passwords, ever</h3><p>We never ask for your job-site, Gmail or LinkedIn passwords. QuickJobs works through the sites you're already signed in to in Chrome.</p></div>
+        <div><span class="ico"><svg><use href="#i-laptop"/></svg></span><h3>Your CV and pay stay on your computer</h3><p>Your CV files, phone number, date of birth and current pay are kept in your own Chrome, not on our servers.</p></div>
+        <div><span class="ico"><svg><use href="#i-hand"/></svg></span><h3>You choose what's stored</h3><p>Each kind of data, like your job history or saved answers, is stored only after you switch it on, and you can switch it off again.</p></div>
+        <div><span class="ico"><svg><use href="#i-shield"/></svg></span><h3>The AI sees only what it needs</h3><p>To score a job, the AI gets the job description and your roles, title, experience, skills, cities and expected pay. Never your phone number, current pay, date of birth or gender.</p></div>
+        <div><span class="ico"><svg><use href="#i-in"/></svg></span><h3>Stored in India, never sold</h3><p>Your data is stored in India, never sold and never used for ads. This site has no ad or tracking scripts.</p></div>
+        <div><span class="ico"><svg><use href="#i-ban"/></svg></span><h3>Delete everything, any time</h3><p>Delete your account and your data goes with it. If you stop your plan, everything of yours is deleted from our server after 30 days.</p></div>
       </div>
     </div>
   </section>
@@ -635,19 +651,20 @@ footer a:hover{color:var(--fg)}
   <section class="gut" aria-labelledby="cmp-h">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow">Why Quickjobs</span>
+        <span class="eyebrow">Why QuickJobs</span>
         <h2 id="cmp-h">The only one that covers all six Indian boards in one run.</h2>
       </div>
       <div class="tbl">
         <table>
-          <thead><tr><th scope="col"><span class="sr">What you need</span></th><th scope="col" class="us">Quickjobs</th><th scope="col">Applying by hand</th><th scope="col">Global auto-apply tools</th><th scope="col">A job board's own AI agent</th></tr></thead>
+          <thead><tr><th scope="col"><span class="sr">What you need</span></th><th scope="col" class="us">QuickJobs</th><th scope="col">Applying by hand</th><th scope="col">Global auto-apply tools</th><th scope="col">A job board's own AI agent</th></tr></thead>
           <tbody>
-            <tr><td>Naukri, iimjobs, Shine, Foundit, Hirist, Instahyre</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> All six, every morning</td><td data-label="By hand">One at a time</td><td data-label="Global tools">Mostly not covered</td><td data-label="A board's own agent">Its own site only</td></tr>
-            <tr><td>LinkedIn hiring posts and recruiter replies</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> Included</td><td data-label="By hand">You check yourself</td><td data-label="Global tools">Varies</td><td data-label="A board's own agent"><span class="m">—</span></td></tr>
-            <tr><td>CTC, notice period and buyout answered your way</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> Saved once, reused</td><td data-label="By hand">Typed every time</td><td data-label="Global tools">Often generic</td><td data-label="A board's own agent">Varies</td></tr>
-            <tr><td>Never applies to your current employer</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> Blocked automatically</td><td data-label="By hand">You remember</td><td data-label="Global tools">Varies</td><td data-label="A board's own agent">Varies</td></tr>
-            <tr><td>Runs while you're at work</td><td data-label="Quickjobs" class="us"><span class="y">✓</span> 9:10 every morning</td><td data-label="By hand"><span class="m">No</span></td><td data-label="Global tools">Yes</td><td data-label="A board's own agent">Yes</td></tr>
-            <tr><td>Pricing</td><td data-label="Quickjobs" class="us">Weekly plans in rupees</td><td data-label="By hand">Your evenings</td><td data-label="Global tools">Often in dollars</td><td data-label="A board's own agent">Part of a paid plan</td></tr>
+            <tr><td>Naukri, iimjobs, Shine, Foundit, Hirist, Instahyre</td><td data-label="QuickJobs" class="us"><span class="y">✓</span> All six, every day</td><td data-label="By hand">One at a time</td><td data-label="Global tools">Mostly not covered</td><td data-label="A board's own agent">Its own site only</td></tr>
+            <tr><td>An AI match score and reason for every job</td><td data-label="QuickJobs" class="us"><span class="y">✓</span> 0–100, with the reason</td><td data-label="By hand">You judge each one</td><td data-label="Global tools">Often</td><td data-label="A board's own agent">Varies</td></tr>
+            <tr><td>LinkedIn hiring posts and recruiter replies</td><td data-label="QuickJobs" class="us"><span class="y">✓</span> Included</td><td data-label="By hand">You check yourself</td><td data-label="Global tools">Varies</td><td data-label="A board's own agent"><span class="m">—</span></td></tr>
+            <tr><td>CTC, notice period and buyout answered your way</td><td data-label="QuickJobs" class="us"><span class="y">✓</span> Saved once, reused</td><td data-label="By hand">Typed every time</td><td data-label="Global tools">Often generic</td><td data-label="A board's own agent">Varies</td></tr>
+            <tr><td>Never applies to your current employer</td><td data-label="QuickJobs" class="us"><span class="y">✓</span> Blocked automatically</td><td data-label="By hand">You remember</td><td data-label="Global tools">Varies</td><td data-label="A board's own agent">Varies</td></tr>
+            <tr><td>Runs while you're at work</td><td data-label="QuickJobs" class="us"><span class="y">✓</span> Daily, at a time you choose</td><td data-label="By hand"><span class="m">No</span></td><td data-label="Global tools">Yes</td><td data-label="A board's own agent">Yes</td></tr>
+            <tr><td>Pricing</td><td data-label="QuickJobs" class="us">Weekly plans in rupees</td><td data-label="By hand">Your evenings</td><td data-label="Global tools">Often in dollars</td><td data-label="A board's own agent">Part of a paid plan</td></tr>
           </tbody>
         </table>
       </div>
@@ -662,12 +679,12 @@ footer a:hover{color:var(--fg)}
         <p>Something else on your mind? Write to <span class="copy">quickjobsbeta@gmail.com</span></p>
       </div>
       <div>
-        <details open><summary>Will my current employer find out?</summary><p>Quickjobs never applies to your current company: it's added to your blocked list from your profile, and you can add others. It doesn't change your profiles or visibility settings on any job site; those stay as you set them.</p></details>
+        <details open><summary>Will my current employer find out?</summary><p>QuickJobs never applies to your current company: it's added to your blocked list from your profile, and you can add others. It doesn't change your profiles or visibility settings on any job site; those stay as you set them.</p></details>
         <details><summary>Is it safe for my Naukri account?</summary><p>It applies as you, from your own Chrome, at a person's pace and within daily limits you set. It stops at any "verify you're human" check instead of trying to get past it. Job sites set their own rules about automated tools, so we keep limits conservative and you can lower them any time.</p></details>
-        <details><summary>Do I need to keep my laptop on?</summary><p>Chrome needs to be running at your run time, which is 9:10 am unless you change it. If your laptop was asleep, the run catches up when Chrome opens, and you get an email if a run is missed.</p></details>
-        <details><summary>What does it cost?</summary><p>Weekly plans, priced in rupees, with a cheaper monthly option. Prices are announced before launch. Founding members on the waitlist get their first 30 days free.</p></details>
-        <details><summary>What does the AI see?</summary><p>To score a job, Quickjobs sends the job description and your title, experience, skills and preferences to its AI provider. Your phone number and current pay aren't part of that. Reading your CV to fill in setup is optional.</p></details>
-        <details><summary>Can I approve every job myself instead?</summary><p>Yes. That's the default. Apply without asking me is a switch you turn on when you're ready, and you can turn it off any morning.</p></details>
+        <details><summary>Do I need to keep my laptop on?</summary><p>Chrome needs to be running at the run time you choose. If your laptop was asleep, the run catches up when Chrome opens, and you get an email if a run is missed.</p></details>
+        <details><summary>What does it cost?</summary><p>Weekly plans, priced in rupees, with a cheaper monthly option. Prices are announced before launch. Early users from the waitlist get their first 30 days free.</p></details>
+        <details><summary>What does the AI see?</summary><p>To score a job, QuickJobs sends the job description and your target roles, title, experience, skills, cities and expected pay to its AI provider. Your phone number, current pay, date of birth and gender are never sent. Reading your CV to fill in setup is optional.</p></details>
+        <details><summary>Can I approve every job myself instead?</summary><p>Yes. That's the default. Apply without asking me is a switch you turn on when you're ready, and you can turn it off any day.</p></details>
         <details><summary>What do I need?</summary><p>Chrome on a Windows, Mac or Linux computer, and accounts on the job sites you want searched. Phones aren't supported yet.</p></details>
       </div>
     </div>
@@ -677,7 +694,7 @@ footer a:hover{color:var(--fg)}
     <div class="wrap">
       <div class="final">
         <div>
-          <h2>Your next application could go out tomorrow at <span class="clock tab">9:10</span>.</h2>
+          <h2>Your next application could go out <span class="clock">tomorrow</span>.</h2>
           <p style="color:var(--muted);margin-top:16px;font-size:1.08rem">We're letting people in from the waitlist in small groups. Join now and you're in the first ones.</p>
         </div>
         <div class="final-r joinbox" data-join="footer">
@@ -687,7 +704,7 @@ footer a:hover{color:var(--fg)}
             <button class="btn btn-p" type="submit">Join the waitlist</button>
           </form>
           <p class="err" role="alert" aria-live="polite"></p>
-          <div class="ticks"><span><svg><use href="#i-check"/></svg>30 days free for founding members</span><span><svg><use href="#i-check"/></svg>No spam: one email when you're in</span></div>
+          <div class="ticks"><span><svg><use href="#i-check"/></svg>30 days free for early users</span><span><svg><use href="#i-check"/></svg>No spam: one email when you're in</span></div>
         </div>
       </div>
     </div>
@@ -696,7 +713,7 @@ footer a:hover{color:var(--fg)}
 
 <footer class="gut">
   <div class="wrap">
-    <span>© 2026 Quickjobs · Made in India for Indian job seekers</span>
+    <span>© 2026 QuickJobs · Made in India for Indian job seekers</span>
     <nav id="legal" hidden><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="refunds.html">Refunds</a></nav>
     <span class="note">Screenshots show example data and made-up companies.</span>
   </div>
