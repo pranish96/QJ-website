@@ -121,7 +121,7 @@ img{max-width:100%;display:block;height:auto}
 .stage::before{content:"";position:absolute;inset:8% 6% -6%;background:radial-gradient(60% 60% at 50% 40%,rgba(79,191,134,.28),transparent 70%);filter:blur(40px);z-index:-1}
 .win-img.dash-img{aspect-ratio:auto;position:relative}
 .dash-img img{display:block;width:100%;height:auto}
-.hl-ring{position:absolute;left:var(--rx,81.9%);top:var(--ry,62.2%);width:var(--rw,15.9%);height:var(--rh,14.4%);border:2px solid var(--fern);border-radius:12px;box-shadow:0 0 0 5px rgba(79,191,134,.16),0 0 36px rgba(79,191,134,.45);pointer-events:none}
+.hl-ring{position:absolute;left:var(--rx,81.9%);top:var(--ry,14.3%);width:var(--rw,15.9%);height:var(--rh,14.5%);border:2px solid var(--fern);border-radius:12px;box-shadow:0 0 0 5px rgba(79,191,134,.16),0 0 36px rgba(79,191,134,.45);pointer-events:none}
 @media (prefers-reduced-motion:no-preference){
   .win{animation:rise 1.1s cubic-bezier(.2,.75,.2,1) .15s both;transform-origin:50% 0}
   @keyframes rise{from{opacity:0;transform:translateY(40px) rotateX(14deg)}to{opacity:1;transform:none}}
@@ -548,7 +548,7 @@ footer a:hover{color:var(--fg)}
             <span class="live"><i></i><span>4 interviews<span class="long"> from 107 applications</span></span></span>
           </div>
           <div class="win-img dash-img">
-            <picture><source media="(max-width:640px)" srcset="shots/hero-dash-m.webp" width="780" height="1218"><img src="shots/hero-dash.webp" width="2200" height="1362" alt="The QuickJobs dashboard after six weeks: today's run finished on schedule with 12 applications sent, an activity log of each application, and totals of 256 jobs found, 107 applied, 12 recruiter replies and 4 interviews, above a 12-week grid of application days." fetchpriority="high"></picture>
+            <picture><source media="(max-width:640px)" srcset="shots/hero-dash-m.webp" width="780" height="1218"><img src="shots/hero-dash.webp" width="2200" height="1354" alt="The QuickJobs dashboard after six weeks: totals of 256 jobs found, 107 applied, 12 recruiter replies and 4 interviews, a 12-week grid of application days, and below them today's run, finished on schedule with 12 applications sent, with an activity log of each application." fetchpriority="high"></picture>
             <span class="hl-ring" aria-hidden="true"></span>
           </div>
         </div>
