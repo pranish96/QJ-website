@@ -143,8 +143,7 @@ img{max-width:100%;display:block;height:auto}
 .boards-n{letter-spacing:.02em;text-transform:none;font-weight:500;color:var(--muted);font-size:.9rem}
 .marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .marq-track{display:flex;width:max-content}
-@media (prefers-reduced-motion:no-preference){.marq-track{animation:marq 70s linear infinite}.marq:hover .marq-track,.marq:focus-within .marq-track{animation-play-state:paused}
-  @keyframes marq{to{transform:translateX(-50%)}}}
+@media (prefers-reduced-motion:no-preference){.marq{touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}.marq.drag{cursor:grabbing}.marq img{-webkit-user-drag:none;pointer-events:none}.marq-track{will-change:transform}}
 .marq-grp{list-style:none;margin:0;padding:0 56px 0 0;display:flex;align-items:center;gap:56px}
 .mq{display:flex;align-items:center;gap:14px;white-space:nowrap}
 .mono{position:relative;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--fern-soft);font-family:var(--display);font-weight:700;font-stretch:112%;font-size:1.1rem;color:var(--fern);flex:none}
@@ -980,5 +979,34 @@ footer a:hover{color:var(--fg)}
 })();
 </script>
 
+<script>
+/* Logo strip: drifts on its own; swipe or drag it and it follows your finger, then eases back into the drift. */
+(() => {
+  const m = document.querySelector('.marq'); if (!m || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const t = m.querySelector('.marq-track'), SECONDS_PER_LOOP = 50;
+  let half = 0, x = 0, v = 0, drag = false, hover = false, lx = 0, lt = 0, prev = performance.now();
+  const measure = () => { half = t.scrollWidth / 2; }; measure(); addEventListener('resize', measure); addEventListener('load', measure);
+  const speed = () => half / SECONDS_PER_LOOP;
+  v = -speed();
+  const tick = now => {
+    const dt = Math.min(0.05, (now - prev) / 1000); prev = now;
+    if (!drag) { const target = hover ? 0 : -speed(); v += (target - v) * (1 - Math.pow(0.08, dt)); x += v * dt; }
+    if (half) { x %= half; if (x > 0) x -= half; }
+    t.style.transform = `translate3d(${x}px,0,0)`;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  m.addEventListener('pointerdown', e => { drag = true; v = 0; lx = e.clientX; lt = e.timeStamp; m.classList.add('drag'); m.setPointerCapture(e.pointerId); });
+  m.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - lx, dt = Math.max(0.008, (e.timeStamp - lt) / 1000);
+    x += dx; v = 0.6 * v + 0.4 * Math.max(-4000, Math.min(4000, dx / dt)); lx = e.clientX; lt = e.timeStamp;
+  });
+  const up = () => { drag = false; m.classList.remove('drag'); };
+  m.addEventListener('pointerup', up); m.addEventListener('pointercancel', up);
+  m.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hover = true; });
+  m.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') hover = false; });
+})();
+</script>
 </body>
 </html>
