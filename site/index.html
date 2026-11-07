@@ -904,22 +904,40 @@ footer a:hover{color:var(--fg)}
     place(); addEventListener('resize', place); addEventListener('load', place);
     const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(+e.target.dataset.i); }), { rootMargin: '-48% 0px -48% 0px' });
     sts.forEach((el) => io2.observe(el));
-    // desktop: one wheel notch or one trackpad swipe = one step. A swipe's trailing momentum is ignored until it settles.
+    // desktop: the steps snap. Every wheel notch, trackpad swipe or Down / Page Down / Space key moves exactly one step,
+    // wherever the pointer is; above the first step and past the last one the page scrolls as usual.
     const calm = matchMedia('(prefers-reduced-motion: reduce)');
     let busy = false, quiet = 0, started = 0;
-    const settle = () => { clearTimeout(quiet); quiet = setTimeout(function done() { const left = 600 - (performance.now() - started); if (left > 0) quiet = setTimeout(done, left); else busy = false; }, 180); };
-    story.addEventListener('wheel', (e) => {
+    const settle = () => { clearTimeout(quiet); quiet = setTimeout(function done() { const left = 650 - (performance.now() - started); if (left > 0) quiet = setTimeout(done, left); else busy = false; }, 180); };
+    const centreOf = (el) => { const r = el.getBoundingClientRect(); return r.top + r.height / 2; };
+    // which step to land on for a move in direction dir, or -1 to let the page scroll normally
+    const target = (dir) => {
+      const mid = innerHeight / 2, cs = sts.map(centreOf);
+      let i = 0; cs.forEach((c, k) => { if (Math.abs(c - mid) < Math.abs(cs[i] - mid)) i = k; });
+      if (Math.abs(cs[i] - mid) > innerHeight * 0.42) return -1; // the steps aren't on screen yet
+      const t = (dir > 0 ? cs[i] > mid + 8 : cs[i] < mid - 8) ? i : i + dir; // not yet centred: snap to it first
+      return t >= 0 && t < sts.length ? t : -1;
+    };
+    const go = (t) => {
+      busy = true; started = performance.now(); settle(); set(t);
+      scrollTo({ top: scrollY + centreOf(sts[t]) - innerHeight / 2, behavior: calm.matches ? 'auto' : 'smooth' });
+    };
+    addEventListener('wheel', (e) => {
       if (innerWidth <= 960 || e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX) || !e.deltaY) return;
       if (busy) { e.preventDefault(); settle(); return; } // the rest of this swipe, or its momentum
-      const dir = e.deltaY > 0 ? 1 : -1, next = active + dir;
-      if (next < 0 || next >= sts.length) return; // past the first or last step: scroll the page as usual
-      const r = sts[active].getBoundingClientRect(), mid = r.top + r.height / 2;
-      if (Math.abs(mid - innerHeight / 2) > innerHeight * 0.3) return; // still entering the section
-      e.preventDefault(); busy = true; started = performance.now(); settle();
-      const t = sts[next].getBoundingClientRect();
-      set(next);
-      scrollTo({ top: scrollY + t.top + t.height / 2 - innerHeight / 2, behavior: calm.matches ? 'auto' : 'smooth' });
+      const t = target(e.deltaY > 0 ? 1 : -1);
+      if (t < 0) return;
+      e.preventDefault(); go(t);
     }, { passive: false });
+    addEventListener('keydown', (e) => {
+      if (innerWidth <= 960 || e.altKey || e.ctrlKey || e.metaKey || e.target.closest('input, textarea, select, [contenteditable], summary, button, a')) return;
+      const dir = { ArrowDown: 1, PageDown: 1, ' ': e.shiftKey ? -1 : 1, ArrowUp: -1, PageUp: -1 }[e.key];
+      if (!dir) return;
+      if (busy) { e.preventDefault(); return; }
+      const t = target(dir);
+      if (t < 0) return;
+      e.preventDefault(); go(t);
+    });
     frs.forEach((el, k) => { if (k > 0) el.querySelectorAll('img').forEach((im) => { im.loading = 'eager'; }); });
   }
 
