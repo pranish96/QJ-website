@@ -140,15 +140,15 @@ img{max-width:100%;display:block;height:auto}
 .marq-track{display:flex;width:max-content}
 @media (prefers-reduced-motion:no-preference){.marq-track{animation:marq 70s linear infinite}.marq:hover .marq-track,.marq:focus-within .marq-track{animation-play-state:paused}
   @keyframes marq{to{transform:translateX(-50%)}}}
-.marq-grp{list-style:none;margin:0;padding:0 14px 0 0;display:flex;gap:14px}
-.mq{display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border:1px solid var(--line-2);border-radius:16px;background:linear-gradient(180deg,var(--surface),var(--bg));white-space:nowrap;transition:border-color .25s,transform .25s}
-.mq:hover{border-color:var(--fern);transform:translateY(-2px)}
-.mono{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--sunk);border:1px solid var(--line-2);font-family:var(--display);font-weight:700;font-stretch:112%;font-size:1.15rem;color:var(--fern)}
+.marq-grp{list-style:none;margin:0;padding:0 56px 0 0;display:flex;align-items:center;gap:56px}
+.mq{display:flex;align-items:center;gap:14px;white-space:nowrap}
+.mono{position:relative;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--fern-soft);font-family:var(--display);font-weight:700;font-stretch:112%;font-size:1.1rem;color:var(--fern);flex:none}
+.mono img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:50%;background:var(--bg)}
 .mq-t{display:flex;flex-direction:column;line-height:1.2}
 .mq-t b{font-family:var(--display);font-weight:700;font-stretch:108%;font-size:1.2rem;color:var(--fg);letter-spacing:-.01em}
 .mq-t small{font-size:.8rem;color:var(--faint)}
-.mq.plus{border-style:dashed}
-.mq.plus .mono{color:var(--blue);font-size:1rem}
+.mq.plus .mono{color:var(--blue);background:rgba(122,167,255,.12);font-size:.95rem}
+.mq.plus .mq-t small{color:var(--blue)}
 @media (prefers-reduced-motion:reduce){.marq{-webkit-mask-image:none;mask-image:none}.marq-track{width:auto}.marq-grp{flex-wrap:wrap;padding:0}.marq-grp[aria-hidden]{display:none}}
 
 /* sections */
@@ -422,7 +422,8 @@ footer a:hover{color:var(--fg)}
   .pop{position:static;width:min(82%,300px)}
   .toast{display:flex;position:static;width:100%;max-width:340px}
   .boards{margin-top:36px}
-  .mono{width:38px;height:38px}
+  .mono{width:36px;height:36px}
+  .marq-grp{gap:40px;padding-right:40px}
   .mq-t b{font-size:1.05rem}
   section{padding-block:56px}
   .sec-head{gap:12px;margin-bottom:28px}
@@ -534,8 +535,8 @@ footer a:hover{color:var(--fg)}
         <div class="boards-h"><span class="live"><i></i>Reads and applies on</span><span class="boards-n">6 job boards, plus LinkedIn and Gmail</span></div>
         <div class="marq">
           <div class="marq-track">
-            <ul class="marq-grp"><li class="mq"><span class="mono">N</span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i</span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S</span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F</span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H</span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I</span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in</span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@</span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
-            <ul class="marq-grp" aria-hidden="true"><li class="mq"><span class="mono">N</span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i</span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S</span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F</span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H</span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I</span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in</span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@</span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
+            <ul class="marq-grp"><li class="mq"><span class="mono">N<img src="shots/logos/naukri.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i<img src="shots/logos/iimjobs.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S<img src="shots/logos/shine.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F<img src="shots/logos/foundit.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H<img src="shots/logos/hirist.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I<img src="shots/logos/instahyre.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in<img src="shots/logos/linkedin.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@<img src="shots/logos/gmail.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
+            <ul class="marq-grp" aria-hidden="true"><li class="mq"><span class="mono">N<img src="shots/logos/naukri.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Naukri</b><small>All industries</small></span></li><li class="mq"><span class="mono">i<img src="shots/logos/iimjobs.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>iimjobs</b><small>Management and MBA roles</small></span></li><li class="mq"><span class="mono">S<img src="shots/logos/shine.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Shine</b><small>All industries</small></span></li><li class="mq"><span class="mono">F<img src="shots/logos/foundit.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Foundit</b><small>Formerly Monster India</small></span></li><li class="mq"><span class="mono">H<img src="shots/logos/hirist.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Hirist</b><small>Tech roles</small></span></li><li class="mq"><span class="mono">I<img src="shots/logos/instahyre.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Instahyre</b><small>Tech and product roles</small></span></li><li class="mq plus"><span class="mono">in<img src="shots/logos/linkedin.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>LinkedIn</b><small>Hiring posts</small></span></li><li class="mq plus"><span class="mono">@<img src="shots/logos/gmail.svg" alt="" onerror="this.remove()"></span><span class="mq-t"><b>Gmail</b><small>Recruiter replies</small></span></li></ul>
           </div>
         </div>
       </div>
