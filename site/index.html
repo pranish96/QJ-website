@@ -72,11 +72,11 @@ img{max-width:100%;display:block;height:auto}
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-stretch:112%;font-size:1.2rem;color:var(--fg);text-decoration:none;letter-spacing:-.01em}
 .logo svg{width:30px;height:30px;flex:none}
 .badge{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--fern);background:var(--fern-soft);border:1px solid rgba(79,191,134,.25);padding:3px 8px;border-radius:999px;font-family:var(--body)}
-.nav-r{display:flex;align-items:center;gap:22px}
+.nav-r{display:flex;align-items:center;gap:20px}
 .nav-r a.lnk{color:var(--muted);text-decoration:none;font-size:.95rem}
 .nav-r a.lnk:hover{color:var(--fg)}
 .badge,.nav-r a.lnk{white-space:nowrap}
-@media (max-width:1040px){.nav-r a.lnk{display:none}}
+@media (max-width:1120px){.nav-r a.lnk{display:none}}
 @media (max-width:640px){.logo .badge{display:none}}
 
 /* buttons and form */
@@ -206,6 +206,68 @@ section{padding-block:96px}
   .story.js .st{opacity:1}
   .st-shot{display:flex}
   .st-shot img{width:100%}
+}
+
+/* install guide */
+.phase{display:flex;align-items:center;gap:12px;font-size:1.25rem;margin:40px 0 8px}
+.phase span{width:30px;height:30px;border-radius:9px;background:var(--fern-soft);color:var(--fern);display:grid;place-items:center;font-size:.95rem}
+.inst{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.inst>li{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line)}
+.inst-t{display:flex;flex-direction:column;gap:10px;min-width:0;position:relative;padding-left:52px}
+.inst-t::before{content:attr(data-n);position:absolute;left:0;top:-2px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;font-family:var(--display);font-weight:700;color:var(--fern);font-variant-numeric:tabular-nums}
+.inst-t h4{margin:0;font-family:var(--display);font-size:1.2rem;font-weight:700;letter-spacing:-.01em}
+.inst-t p{color:var(--muted);font-size:1rem}
+.inst-t b{color:var(--fg);font-weight:600}
+.tip{font-size:.92rem!important;color:var(--amber)!important}
+.inst-v{min-width:0;display:flex;justify-content:center}
+.inst-v .shot{width:100%;box-shadow:0 24px 50px -30px var(--shadow)}
+.inst-v.narrow .shot{max-width:340px}
+.inst-v.mid .shot{max-width:460px}
+.inst-v.tall .shot{max-width:420px}
+.inst-v.pair{gap:14px;align-items:flex-start}
+.inst-v.pair .shot:first-child{flex:0 0 38%}
+.copyline{display:flex;gap:8px;align-items:stretch;max-width:380px}
+.copyline code{flex:1;min-width:0;font:600 .95rem ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--sunk);border:1px solid var(--line-2);border-radius:10px;padding:10px 12px;user-select:all;color:var(--fg)}
+.files{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
+.file{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 20px;border:1px solid var(--line-2);border-radius:14px;background:var(--surface);min-width:150px}
+.file b{font-size:.92rem}.file small{color:var(--faint);font-size:.8rem}
+.fi{width:46px;height:54px;border-radius:6px;display:grid;place-items:center;font:700 .7rem var(--body);letter-spacing:.06em}
+.fi.zip{background:#e8efe9;color:#0f1b16}
+.fi.dir{width:58px;height:44px;border-radius:5px 5px 7px 7px;background:#4fbf86;position:relative}
+.fi.dir::before{content:"";position:absolute;left:0;top:-7px;width:24px;height:9px;border-radius:4px 4px 0 0;background:#4fbf86}
+.arrow{font-size:1.6rem;color:var(--fern)}
+.cmock{width:100%;max-width:420px;border-radius:14px;overflow:hidden;background:#ffffff;color:#1f1f1f;font:14px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;position:relative;box-shadow:0 24px 50px -30px var(--shadow)}
+.cm-bar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#e8eaed}
+.cm-url{flex:1;background:#fff;border-radius:999px;padding:7px 14px;color:#5f6368;font-size:13px}
+.cm-ico{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#5f6368}
+.cm-ico svg{width:18px;height:18px}
+.cm-ava{width:26px;height:26px;border-radius:50%;background:#7aa7ff;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600}
+.cm-menu{margin:8px 12px 14px auto;width:250px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.18);padding:8px 0;background:#fff}
+.cm-h{padding:6px 16px 8px;font-weight:600;font-size:13px;color:#1f1f1f}
+.cm-row{display:flex;align-items:center;gap:10px;padding:8px 16px}
+.cm-logo svg{width:22px;height:22px;display:block}
+.cm-row span:nth-child(2){flex:1;font-size:13px}
+.cm-pin{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#5f6368}
+.cm-pin svg{width:16px;height:16px}
+.cm-foot{border-top:1px solid #e8eaed;margin-top:6px;padding:10px 16px 4px;font-size:13px;color:#1f1f1f}
+.cm-note{position:absolute;left:12px;bottom:8px;font-size:11px;color:#80868b}
+.ring{outline:3px solid #f59e0b;outline-offset:2px}
+.sites{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:440px}
+.sites li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border:1px solid var(--line-2);border-radius:12px;background:var(--surface);font-family:var(--display);font-weight:600}
+.sites li::after{content:"Signed in";font:500 .72rem var(--body);color:var(--fern)}
+.inst-more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:36px}
+.inst-more>div{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.inst-more h4{margin:0;font-family:var(--display);font-size:1.1rem}
+.inst-more p,.inst-more li{color:var(--muted);font-size:.95rem}
+.inst-more ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:8px}
+.inst-more b{color:var(--fg);font-weight:600}
+.inst-link{display:inline-flex;align-items:center;gap:6px;font-size:.95rem;color:var(--fern);text-decoration:none;font-weight:600;margin-top:4px}
+.inst-link:hover{text-decoration:underline}
+@media (max-width:860px){
+  .inst>li{grid-template-columns:1fr;gap:18px;padding:24px 0}
+  .inst-v{justify-content:flex-start}
+  .inst-more{grid-template-columns:1fr}
+  .sites{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 /* control bento */
@@ -402,6 +464,7 @@ footer a:hover{color:var(--fg)}
       <a class="lnk" href="#how">How it works</a>
       <a class="lnk" href="#control">Control</a>
       <a class="lnk" href="#privacy">Privacy</a>
+      <a class="lnk" href="#install">Install</a>
       <a class="lnk" href="#faq">Questions</a>
       <a class="btn btn-p btn-s" href="#top" data-focus-join>Join the waitlist</a>
     </div>
@@ -432,6 +495,7 @@ footer a:hover{color:var(--fg)}
               <span><svg><use href="#i-check"/></svg>One email when your invite is ready</span>
             </div>
           </div>
+          <a class="inst-link" href="#install">Already have an invite? Install the beta →</a>
         </div>
 
         <div class="stage">
@@ -671,6 +735,57 @@ footer a:hover{color:var(--fg)}
     </div>
   </section>
 
+  <section class="gut" id="install" aria-labelledby="install-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">For beta testers</span>
+        <h2 id="install-h">Install the beta in about ten minutes.</h2>
+        <p>QuickJobs isn't on the Chrome Web Store yet, so beta testers add it to Chrome by hand. You need Chrome on a laptop or desktop (Windows, Mac or Linux) and your invite email, which has the download link and your invite code.</p>
+      </div>
+
+      <h3 class="phase"><span>A</span>Add QuickJobs to Chrome</h3>
+      <ol class="inst" start="1">
+        <li><div class="inst-t" data-n="1"><h4>Download and unzip it</h4><p>Open the link in your invite email to download the zip. Unzip it into a folder you'll keep, such as <b>Documents › QuickJobs</b>. On Windows, right-click the zip and choose <b>Extract All</b>; on a Mac, double-click it.</p><p class="tip">Don't delete or move this folder later. Chrome runs QuickJobs from it.</p></div>
+          <div class="inst-v"><div class="files" aria-label="The downloaded zip becomes a QuickJobs folder"><div class="file"><span class="fi zip">ZIP</span><b>quickjobs-beta.zip</b><small>Downloads</small></div><span class="arrow" aria-hidden="true">→</span><div class="file"><span class="fi dir"></span><b>QuickJobs</b><small>Documents · keep this</small></div></div></div></li>
+        <li><div class="inst-t" data-n="2"><h4>Turn on Developer mode</h4><p>In Chrome, type this in the address bar and press Enter, then switch on <b>Developer mode</b> at the top right.</p><div class="copyline"><code id="ext-url">chrome://extensions</code><button class="btn btn-g btn-s" type="button" data-copy-text="chrome://extensions">Copy</button></div></div>
+          <div class="inst-v"><div class="shot"><img src="shots/install/i2-devmode.webp" width="1020" height="112" alt="Chrome's extensions page with the Developer mode switch highlighted, still off." loading="lazy"></div></div></li>
+        <li><div class="inst-t" data-n="3"><h4>Click Load unpacked</h4><p>Three buttons appear. Click <b>Load unpacked</b> and select the QuickJobs folder you unzipped: the folder itself, the one with <b>manifest.json</b> inside, not the zip.</p></div>
+          <div class="inst-v"><div class="shot"><img src="shots/install/i3-load.webp" width="1320" height="330" alt="Developer mode is on and the Load unpacked button is highlighted." loading="lazy"></div></div></li>
+        <li><div class="inst-t" data-n="4"><h4>Check that QuickJobs is on</h4><p><b>QuickJobs (beta)</b> now shows on the page with its switch turned on. If Chrome shows an error instead, you picked the wrong folder: go back a step.</p></div>
+          <div class="inst-v mid"><div class="shot"><img src="shots/install/i4-loaded.webp" width="900" height="540" alt="The QuickJobs (beta) card on the extensions page, switched on." loading="lazy"></div></div></li>
+        <li><div class="inst-t" data-n="5"><h4>Pin it to your toolbar</h4><p>Click the puzzle-piece icon at the top right of Chrome, then the pin next to QuickJobs. Its green bolt stays in your toolbar from then on.</p></div>
+          <div class="inst-v"><div class="cmock" aria-label="Illustration: the puzzle-piece menu in Chrome's toolbar, with the pin next to QuickJobs highlighted"><div class="cm-bar"><span class="cm-url">chrome://extensions</span><span class="cm-ico ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3.5a2 2 0 0 1 4 0V5h3.5A1.5 1.5 0 0 1 19 6.5V10h-1.5a2 2 0 1 0 0 4H19v3.5a1.5 1.5 0 0 1-1.5 1.5H14v-1.5a2 2 0 1 0-4 0V19H6.5A1.5 1.5 0 0 1 5 17.5V14h1.5a2 2 0 1 0 0-4H5V6.5A1.5 1.5 0 0 1 6.5 5H10V3.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="cm-ava">R</span></div><div class="cm-menu"><p class="cm-h">Extensions</p><div class="cm-row"><span class="cm-logo"><svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#2e6b3f"/><path d="M16.6 5.5 8.6 16.3h5.9l-1 8.2 8.4-10.9h-6l.7-8.1Z" fill="#fff"/></svg></span><span>QuickJobs (beta)</span><span class="cm-pin ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l-1 6 3 3v2h-4v6l-1 1-1-1v-6H7v-2l3-3-1-6Z" fill="currentColor"/></svg></span></div><p class="cm-foot">Manage extensions</p></div><small class="cm-note">Illustration</small></div></div></li>
+      </ol>
+
+      <h3 class="phase"><span>B</span>Create your account</h3>
+      <ol class="inst" start="6">
+        <li><div class="inst-t" data-n="6"><h4>Enter your email</h4><p>Click the QuickJobs icon, choose <b>Create account</b>, type your email and click <b>Send me a code</b>. Use the address your invite was sent to.</p></div>
+          <div class="inst-v narrow"><div class="shot"><img src="shots/install/i6-email.webp" width="720" height="680" alt="The QuickJobs popup: Create account selected, email typed, Send me a code highlighted." loading="lazy"></div></div></li>
+        <li><div class="inst-t" data-n="7"><h4>Type the 6-digit code</h4><p>Check your inbox for a 6-digit code, and Spam or Promotions too. Type it in and click <b>Sign in</b>. No password needed.</p></div>
+          <div class="inst-v narrow"><div class="shot"><img src="shots/install/i7-code.webp" width="720" height="680" alt="The code screen with digits being typed and Sign in highlighted." loading="lazy"></div></div></li>
+        <li><div class="inst-t" data-n="8"><h4>Add your CV and profile</h4><p>Setup opens in a new tab. Upload your CV as a PDF and QuickJobs fills in what it can read. Check the rest: city, experience, pay in lakhs and notice period.</p></div>
+          <div class="inst-v"><div class="shot"><img src="shots/install/i8-profile.webp" width="1640" height="1080" alt="The Profile and CV page with Upload your CV." loading="lazy"></div></div></li>
+        <li><div class="inst-t" data-n="9"><h4>Choose roles, cities and sites</h4><p>Under <b>Job preferences</b>, add up to five roles and the cities you'd work in, then pick your job sites. Leave <b>Apply without asking me</b> off until you trust the matches; until then you approve each job.</p></div>
+          <div class="inst-v tall"><div class="shot"><img src="shots/install/i9-prefs.webp" width="1336" height="1640" alt="Job preferences: roles, cities, and the Apply without asking me switch." loading="lazy"></div></div></li>
+        <li><div class="inst-t" data-n="10"><h4>Enter your invite code</h4><p>On the next page, type the invite code from your email and click <b>Start my beta</b>. Everything is free during the beta.</p></div>
+          <div class="inst-v"><div class="shot"><img src="shots/install/i10-invite.webp" width="1044" height="302" alt="The invite code box with BETA-7KQ2-91XD typed in and the Start my beta button." loading="lazy"></div></div></li>
+      </ol>
+
+      <h3 class="phase"><span>C</span>Your first run</h3>
+      <ol class="inst" start="11">
+        <li><div class="inst-t" data-n="11"><h4>Sign in to your job sites</h4><p>In the same Chrome, sign in to the sites you picked, the way you normally do. QuickJobs uses those sign-ins and never asks for your passwords.</p></div>
+          <div class="inst-v"><ul class="sites" aria-label="Job sites to sign in to"><li>Naukri</li><li>iimjobs</li><li>Shine</li><li>Foundit</li><li>Hirist</li><li>Instahyre</li></ul></div></li>
+        <li><div class="inst-t" data-n="12"><h4>Click Run now</h4><p>Click the QuickJobs icon, then <b>Run now</b>. The first run reads every site, scores the jobs and fills your dashboard. Keep Chrome open while it runs; you can watch each step as it happens.</p><p class="tip">After this, it runs by itself every day at the time you chose.</p></div>
+          <div class="inst-v pair"><div class="shot"><img src="shots/install/i12-runnow.webp" width="720" height="694" alt="The popup ready for the first run, with Run now highlighted." loading="lazy"></div><div class="shot"><img src="shots/install/i13-firstrun.webp" width="1026" height="840" alt="The first run in progress: sign-ins checked, sites read, jobs scored, applying." loading="lazy"></div></div></li>
+      </ol>
+
+      <div class="inst-more">
+        <div><h4>Updating to a new version</h4><p>When we email a new version, unzip it into the same QuickJobs folder and replace the files. Then open <b>chrome://extensions</b> and click the reload arrow on the QuickJobs card. Your settings stay as they are.</p><p class="tip">Don't remove QuickJobs and add it again: that deletes the CV and details kept on your computer.</p></div>
+        <div><h4>If something goes wrong</h4><ul><li><b>"Manifest file is missing":</b> you picked the wrong folder. Choose the one with manifest.json inside.</li><li><b>QuickJobs disappeared:</b> its folder was moved or deleted. Put it back and click Load unpacked again.</li><li><b>No code email:</b> check Spam, wait a minute, then click Send a new code.</li><li><b>Chrome warns about developer-mode extensions:</b> choose to keep them. It's expected while QuickJobs is in beta.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
   <section class="gut" id="faq" aria-labelledby="faq-h">
     <div class="wrap faq">
       <div class="sec-head" style="margin-bottom:0">
@@ -758,6 +873,14 @@ footer a:hover{color:var(--fg)}
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
   if (PROD) $('#legal').hidden = false;
+
+  // copy chrome://extensions (web pages can't link to chrome:// addresses)
+  $$('[data-copy-text]').forEach((b) => b.addEventListener('click', async () => {
+    const t = b.dataset.copyText;
+    try { await navigator.clipboard.writeText(t); b.textContent = 'Copied'; }
+    catch { const r = document.createRange(); r.selectNodeContents($('#ext-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; }
+    setTimeout(() => (b.textContent = 'Copy'), 1800);
+  }));
 
   // nav border on scroll
   const nav = $('#nav');
