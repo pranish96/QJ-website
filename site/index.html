@@ -747,10 +747,6 @@ footer a:hover{color:var(--fg)}
       </fieldset>
       <div><button class="btn btn-g btn-s" type="submit">Send answers</button></div>
     </form>
-    <div data-share hidden>
-      <p style="margin-bottom:8px"><b style="color:var(--fg)">Move up the list.</b> Each friend who joins with your link moves you a day ahead.</p>
-      <div class="share"><code data-link></code><button class="btn btn-g btn-s" type="button" data-copy>Copy</button></div>
-    </div>
   </div>
 </template>
 
@@ -845,7 +841,6 @@ footer a:hover{color:var(--fg)}
     const n = $('#done-tpl').content.firstElementChild.cloneNode(true);
     $('[data-email]', n).textContent = email;
     if (r.already) $('[data-title]', n).textContent = "You're already on the list.";
-    if (r.position) $('[data-sub]', n).innerHTML = `You're <span class="pos">#${Number(r.position).toLocaleString('en-IN')}</span> in line. We'll email <b></b> when your invite is ready.`, $('[data-sub] b', n).textContent = email;
     const code = r.ref_code;
     const qs = $('[data-qs]', n);
     if (!code || r.already) qs.remove();
@@ -857,18 +852,6 @@ footer a:hover{color:var(--fg)}
       try { await details(code, exp, sites); qs.innerHTML = '<p style="color:var(--fern)">Thanks. That helps us invite the right people first.</p>'; }
       catch { b.disabled = false; b.textContent = 'Try again'; }
     });
-    if (code) {
-      const share = $('[data-share]', n); share.hidden = false;
-      const link = PROD ? `${CFG.site || location.origin + location.pathname}?ref=${code}` : `Your code: ${code}`;
-      $('[data-link]', n).textContent = link;
-      if (!PROD) $('[data-share] p', n).innerHTML = '<b style="color:var(--fg)">Your invite code.</b> Share it: each friend who joins with it moves you a day ahead.';
-      $('[data-copy]', n).addEventListener('click', async (e) => {
-        const t = PROD ? link : code;
-        try { await navigator.clipboard.writeText(t); e.target.textContent = 'Copied'; }
-        catch { const r2 = document.createRange(); r2.selectNodeContents($('[data-link]', n)); const s = getSelection(); s.removeAllRanges(); s.addRange(r2); e.target.textContent = 'Selected'; }
-        setTimeout(() => (e.target.textContent = 'Copy'), 1800);
-      });
-    }
     box.replaceChildren(n); n.focus({ preventScroll: true });
   }
 
