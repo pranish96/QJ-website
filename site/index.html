@@ -108,6 +108,7 @@ img{max-width:100%;display:block;height:auto}
 .hero{position:relative;padding-block:56px 40px}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:end}
 .hero-side{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero-side .err:empty{display:none}
 .hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
 .pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-size:.88rem;color:var(--muted);border:1px solid var(--line-2);background:var(--glass);padding:6px 12px 6px 8px;border-radius:999px}
 .pill i{width:8px;height:8px;border-radius:50%;background:var(--fern);box-shadow:0 0 0 4px rgba(79,191,134,.2)}
@@ -521,11 +522,6 @@ footer a:hover{color:var(--fg)}
               <button class="btn btn-p" type="submit">Get early access</button>
             </form>
             <p class="err" role="alert" aria-live="polite"></p>
-            <div class="ticks">
-              <span><svg><use href="#i-check"/></svg>Early users get 30 days free</span>
-              <span><svg><use href="#i-check"/></svg>No card needed</span>
-              <span><svg><use href="#i-check"/></svg>One email when your invite is ready</span>
-            </div>
           </div>
           <a class="inst-link" href="install.html">Already have an invite? Install the beta →</a>
         </div>
