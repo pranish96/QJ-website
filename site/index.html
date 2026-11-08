@@ -126,6 +126,13 @@ img{max-width:100%;display:block;height:auto}
   .hero .stage{margin-top:44px}
 }
 
+/* dashboard lifted off the page: a soft green halo from its top edge, a faint lit rim, depth below */
+.hero .stage .win{position:relative;border-color:rgba(79,191,134,.32);
+  box-shadow:0 -34px 110px -26px rgba(79,191,134,.5),0 0 0 1px rgba(79,191,134,.1),0 50px 90px -40px rgba(0,0,0,.85)}
+.hero .stage .win::before{content:"";position:absolute;left:12%;right:12%;top:-1px;height:1px;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(170,245,205,.95),transparent)}
+.hero .stage::before{inset:-6% 8% auto;height:60%;background:radial-gradient(55% 60% at 50% 45%,rgba(79,191,134,.34),transparent 72%);filter:blur(34px)}
+
 .hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
 .pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-size:.88rem;color:var(--muted);border:1px solid var(--line-2);background:var(--glass);padding:6px 12px 6px 8px;border-radius:999px}
 .pill i{width:8px;height:8px;border-radius:50%;background:var(--fern);box-shadow:0 0 0 4px rgba(79,191,134,.2)}
