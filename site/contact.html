@@ -539,6 +539,30 @@ footer a:hover{color:var(--fg)}
 .ct-done p{color:var(--muted)}
 @media (max-width:900px){.ct{grid-template-columns:1fr;gap:36px}}
 @media (max-width:560px){.contact-page{padding-block:32px 64px}.ct-row{grid-template-columns:1fr}.ct-card{padding:22px}.ct-send{width:100%}}
+
+/* mobile menu: a labelled Menu button opens a drop-down sheet below the bar (≤1120 px, where the links are hidden) */
+.menu-b{display:none;align-items:center;gap:10px;height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line-2);background:transparent;color:var(--fg);font:inherit;font-weight:600;font-size:.95rem;cursor:pointer}
+.menu-b:hover{border-color:var(--fern)}
+.menu-b:focus-visible{outline:2px solid var(--fern);outline-offset:2px}
+.mb-i{position:relative;width:18px;height:12px;flex:none}
+.mb-i i{position:absolute;left:0;right:0;height:2px;border-radius:2px;background:currentColor;transition:transform .22s ease,opacity .22s ease}
+.mb-i i:nth-child(1){top:0}.mb-i i:nth-child(2){top:5px}.mb-i i:nth-child(3){top:10px}
+.menu-b[aria-expanded="true"] .mb-i i:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.menu-b[aria-expanded="true"] .mb-i i:nth-child(2){opacity:0}
+.menu-b[aria-expanded="true"] .mb-i i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+@media (max-width:1120px){.menu-b{display:inline-flex}}
+.mnav{position:fixed;left:0;right:0;top:var(--mt,64px);bottom:0;z-index:90;background:rgba(3,8,6,.62);opacity:0;transition:opacity .22s ease}
+.mnav.open{opacity:1}
+.mnav-p{background:var(--bg);border-bottom:1px solid var(--line-2);box-shadow:0 30px 60px -30px rgba(0,0,0,.8);padding:6px max(20px,env(safe-area-inset-left)) 24px;transform:translateY(-10px);transition:transform .22s ease;max-height:calc(100% - 24px);overflow:auto}
+.mnav.open .mnav-p{transform:none}
+.mnav ul{list-style:none;margin:0 auto;padding:0;max-width:var(--w)}
+.mnav li a{display:flex;align-items:center;justify-content:space-between;min-height:56px;font-family:var(--display);font-weight:650;font-size:1.3rem;color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+.mnav li a::after{content:"→";color:var(--faint);font-family:var(--body);font-weight:400}
+.mnav li a[aria-current]{color:var(--fern)}
+.mnav-cta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px auto 0;max-width:var(--w)}
+.mnav-cta .btn{height:50px;justify-content:center}
+html.menu-open{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.mnav,.mnav-p,.mb-i i{transition:none}}
 </style>
 </head>
 <body>
@@ -574,9 +598,31 @@ footer a:hover{color:var(--fg)}
       <a class="lnk" href="contact" aria-current="page">Contact</a>
       <a class="btn btn-o btn-s nav-inst" href="install"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Install</a>
       <a class="btn btn-p btn-s" href="./#top">Join the waitlist</a>
+      <button class="menu-b" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-i" aria-hidden="true"><i></i><i></i><i></i></span><span class="mb-t">Menu</span></button>
     </div>
   </div>
 </header>
+<div class="mnav" id="mnav" hidden><div class="mnav-p"><nav aria-label="Main"><ul><li><a href="./#how">How it works</a></li><li><a href="./#control">Control</a></li><li><a href="./#privacy">Privacy</a></li><li><a href="./#faq">Questions</a></li><li><a href="contact" aria-current="page">Contact</a></li></ul><div class="mnav-cta"><a class="btn btn-o" href="install">Install</a><a class="btn btn-p" href="./#top">Join the waitlist</a></div></nav></div></div>
+<script>
+(() => {
+  // mobile menu (disclosure pattern): Menu/Close button, Escape or a tap outside closes, focus goes back to the button
+  const b = document.querySelector('.menu-b'), m = document.getElementById('mnav'), bar = document.getElementById('nav'), root = document.documentElement;
+  if (!b || !m) return;
+  const isOpen = () => b.getAttribute('aria-expanded') === 'true';
+  const set = (open, focusBack) => {
+    b.setAttribute('aria-expanded', String(open)); b.querySelector('.mb-t').textContent = open ? 'Close' : 'Menu';
+    root.classList.toggle('menu-open', open);
+    if (open) { m.style.setProperty('--mt', Math.round(bar.getBoundingClientRect().bottom) + 'px'); m.hidden = false; requestAnimationFrame(() => m.classList.add('open')); }
+    else { m.classList.remove('open'); setTimeout(() => { if (!isOpen()) m.hidden = true; }, 230); if (focusBack) b.focus(); }
+  };
+  b.addEventListener('click', () => set(!isOpen()));
+  m.addEventListener('click', (e) => { if (e.target === m) set(false, true); else if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) { e.preventDefault(); set(false, true); } });
+  m.addEventListener('focusout', (e) => { if (e.relatedTarget && !m.contains(e.relatedTarget) && e.relatedTarget !== b) set(false); });
+  matchMedia('(min-width: 1121px)').addEventListener('change', (e) => { if (e.matches && isOpen()) set(false); });
+})();
+</script>
+
 
 <main id="top" class="contact-page">
   <section class="gut" aria-labelledby="contact-h">
