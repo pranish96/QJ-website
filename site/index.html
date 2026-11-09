@@ -512,6 +512,7 @@ footer a:hover{color:var(--fg)}
 .mnav-cta .btn{height:50px;justify-content:center}
 html.menu-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.mnav,.mnav-p,.mb-i i{transition:none}}
+
 </style>
 </head>
 <body>
@@ -975,40 +976,31 @@ html.menu-open{overflow:hidden}
     place(); addEventListener('resize', place); addEventListener('load', place);
     const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(+e.target.dataset.i); }), { rootMargin: '-48% 0px -48% 0px' });
     sts.forEach((el) => io2.observe(el));
-    // desktop: the steps snap. Every wheel notch, trackpad swipe or Down / Page Down / Space key moves exactly one step,
-    // wherever the pointer is; above the first step and past the last one the page scrolls as usual.
-    const calm = matchMedia('(prefers-reduced-motion: reduce)');
-    let busy = false, quiet = 0, started = 0;
-    const settle = () => { clearTimeout(quiet); quiet = setTimeout(function done() { const left = 650 - (performance.now() - started); if (left > 0) quiet = setTimeout(done, left); else busy = false; }, 180); };
-    const centreOf = (el) => { const r = el.getBoundingClientRect(); return r.top + r.height / 2; };
-    // which step to land on for a move in direction dir, or -1 to let the page scroll normally
-    const target = (dir) => {
-      const mid = innerHeight / 2, cs = sts.map(centreOf);
-      let i = 0; cs.forEach((c, k) => { if (Math.abs(c - mid) < Math.abs(cs[i] - mid)) i = k; });
-      if (Math.abs(cs[i] - mid) > innerHeight * 0.42) return -1; // the steps aren't on screen yet
-      const t = (dir > 0 ? cs[i] > mid + 8 : cs[i] < mid - 8) ? i : i + dir; // not yet centred: snap to it first
-      return t >= 0 && t < sts.length ? t : -1;
+    // desktop: when a scroll inside the steps has really finished, glide to the next step in the direction of travel.
+    // It never blocks or swallows input (trackpads and fast wheels scroll freely), it waits until the gesture's
+    // momentum has stopped, it only follows the person's own scrolling (not links or jumps), and past the last step
+    // going down, or above the first going up, it does nothing.
+    const calm = matchMedia('(prefers-reduced-motion: reduce)'), wide = matchMedia('(min-width: 961px)');
+    let restY = scrollY, touched = false, lastInput = 0, auto = false, tick = 0;
+    const centres = () => sts.map((el) => { const r = el.getBoundingClientRect(); return r.top + scrollY + r.height / 2 - innerHeight / 2; });
+    const input = () => { touched = true; lastInput = performance.now(); auto = false; };
+    const settle = () => {
+      clearTimeout(tick);
+      const quietFor = performance.now() - lastInput;
+      if (touched && quietFor < 240) { tick = setTimeout(settle, 260 - quietFor); return; }   // the gesture (or its momentum) is still going
+      const y = scrollY, from = restY, mine = touched, dir = Math.sign(y - from);
+      restY = y; touched = false;
+      if (auto) { auto = false; return; }                                                   // our own glide just ended
+      if (!mine || !wide.matches || Math.abs(y - from) < 4 || document.documentElement.classList.contains('menu-open')) return;
+      const cs = centres(), first = cs[0], last = cs[cs.length - 1];
+      if ((dir < 0 && y <= first + 2) || (dir > 0 && y >= last - 2)) return;              // leaving the section: hands off
+      if (y < first - innerHeight * 0.5 || y > last + innerHeight * 0.5) return;           // nowhere near the steps
+      const to = dir > 0 ? cs.find((c) => c > y + 2) : [...cs].reverse().find((c) => c < y - 2);
+      if (to == null) return;
+      auto = true; scrollTo({ top: Math.round(to), behavior: calm.matches ? 'auto' : 'smooth' });
     };
-    const go = (t) => {
-      busy = true; started = performance.now(); settle(); set(t);
-      scrollTo({ top: scrollY + centreOf(sts[t]) - innerHeight / 2, behavior: calm.matches ? 'auto' : 'smooth' });
-    };
-    addEventListener('wheel', (e) => {
-      if (innerWidth <= 960 || document.documentElement.classList.contains('menu-open') || e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX) || !e.deltaY) return;
-      if (busy) { e.preventDefault(); settle(); return; } // the rest of this swipe, or its momentum
-      const t = target(e.deltaY > 0 ? 1 : -1);
-      if (t < 0) return;
-      e.preventDefault(); go(t);
-    }, { passive: false });
-    addEventListener('keydown', (e) => {
-      if (innerWidth <= 960 || document.documentElement.classList.contains('menu-open') || e.altKey || e.ctrlKey || e.metaKey || e.target.closest('input, textarea, select, [contenteditable], summary, button, a')) return;
-      const dir = { ArrowDown: 1, PageDown: 1, ' ': e.shiftKey ? -1 : 1, ArrowUp: -1, PageUp: -1 }[e.key];
-      if (!dir) return;
-      if (busy) { e.preventDefault(); return; }
-      const t = target(dir);
-      if (t < 0) return;
-      e.preventDefault(); go(t);
-    });
+    ['wheel', 'touchmove', 'keydown', 'pointerdown'].forEach((t) => addEventListener(t, input, { passive: true }));
+    addEventListener('scroll', () => { clearTimeout(tick); tick = setTimeout(settle, 160); }, { passive: true });
     frs.forEach((el, k) => { if (k > 0) el.querySelectorAll('img').forEach((im) => { im.loading = 'eager'; }); });
   }
 
