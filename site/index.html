@@ -422,6 +422,7 @@ details p{color:var(--muted);padding:0 0 22px;max-width:40em}
 .final{position:relative;overflow:hidden;border:1px solid var(--line-2);border-radius:28px;padding:72px 56px;background:radial-gradient(60% 90% at 85% 0%,rgba(79,191,134,.22),transparent 70%),radial-gradient(50% 80% at 0% 100%,rgba(52,86,200,.18),transparent 70%),var(--surface);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center}
 .final h2{font-size:clamp(2rem,4.4vw,3.4rem)}
 .final .clock{font-family:var(--display);font-weight:700;color:var(--fern)}
+.final .num{font-family:var(--display);font-weight:760;color:var(--fern);font-size:1.25em;line-height:1}
 .final-r{display:flex;flex-direction:column;gap:14px;min-width:0}
 @media (max-width:900px){.final{grid-template-columns:1fr;padding:44px 22px}}
 
@@ -885,7 +886,7 @@ html.menu-open{overflow:hidden}
     <div class="wrap">
       <div class="final">
         <div>
-          <h2>Your next application could go out <span class="clock">tomorrow</span>.</h2>
+          <h2>Your next <span class="num">100</span> applications could go out <span class="clock">tomorrow</span>.</h2>
           <p style="color:var(--muted);margin-top:16px;font-size:1.08rem">We're letting people in from the waitlist in small groups. Join now and you're in the first ones.</p>
         </div>
         <div class="final-r joinbox" data-join="footer">
