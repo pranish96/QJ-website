@@ -226,6 +226,16 @@ section{padding-block:96px}
 .dl-note{margin-top:14px;color:var(--faint);font-size:.92rem}
 .phone-only{display:none;color:var(--amber)}
 .is-phone .phone-only{display:inline}
+/* on a phone the extension can't be added: lead with sending the page to a computer */
+.phone-box{display:flex;flex-direction:column;gap:12px;padding:18px;margin-bottom:20px;border:1px solid rgba(255,178,107,.4);border-radius:16px;background:rgba(255,178,107,.06);max-width:640px}
+.phone-box b{font-family:var(--display);font-size:1.12rem;display:flex;align-items:center;gap:10px}
+.phone-box b svg{width:20px;height:20px;color:var(--amber);flex:none}
+.phone-box p{color:var(--muted);font-size:.95rem}
+.phone-box .btn{width:100%}
+.phone-box .ok{color:var(--fern);font-size:.9rem;min-height:0}
+.phone-box .ok:empty{display:none}
+.is-phone .store-btn{background:transparent;color:var(--fg);border:1px solid var(--line-2);box-shadow:none;height:50px;font-size:1rem}
+@media (max-width:640px){.back{display:inline-flex;align-items:center;min-height:44px;margin-bottom:10px}.logo{min-height:44px}section{padding-block:28px 48px}.guide{margin-top:32px}}
 .guide{margin-top:44px}
 .guide.reveal{animation:guide-in .6s cubic-bezier(.2,.75,.2,1)}
 @keyframes guide-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -605,9 +615,15 @@ html.menu-open{overflow:hidden}
         <h2 id="install-h">Add QuickJobs to Chrome.</h2>
         <p>QuickJobs is in the Chrome Web Store. Add it in one click, sign in with the email your invite was sent to, and run your first search. It takes about three minutes.</p>
       </div>
+      <div class="phone-box" id="phone-box" hidden>
+        <b><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="5" width="15" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 18.5h19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>You're on a phone</b>
+        <p>QuickJobs is added to Chrome on a laptop or desktop. Send this page to yourself and open it there; the steps below show what happens next.</p>
+        <button class="btn btn-p" type="button" id="send-self">Send this page to my computer</button>
+        <p class="ok" id="send-ok" role="status"></p>
+      </div>
       <div class="store-cta">
         <a class="btn btn-p store-btn" href="https://chrome.google.com/webstore/detail/fehahcmdnhepmaalgbagnlhdefikamae" target="_blank" rel="noopener"><svg viewBox="2 10 108 108" aria-hidden="true"><path d="M95 33 A44 44 0 1 0 81 97 L74 87 A33 33 0 1 1 86 40 Z" fill="currentColor"/><path d="M56 36 L80 39 L70 56 L89 58 L100 116 L71 72 L47 71 Z" fill="currentColor"/></svg>Add to Chrome<span class="sr"> (opens the Chrome Web Store in a new tab)</span></a>
-        <p class="dl-note">Opens the Chrome Web Store in a new tab. You'll need Chrome on a computer and your invite email, which has your invite code. <span class="phone-only">On a phone? Open this page on your laptop or desktop.</span></p>
+        <p class="dl-note">Opens the Chrome Web Store in a new tab. You'll need Chrome on a computer and your invite email, which has your invite code.</p>
       </div>
 
       <div class="guide" id="guide">
@@ -780,5 +796,19 @@ html.menu-open{overflow:hidden}
 })();
 </script>
 
+<script>
+/* Phones can't add a Chrome extension: show a way to send this page to a computer (share sheet, else email, with the link copied). */
+(() => {
+  const ua = navigator.userAgent, phone = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) < 820);
+  const box = document.getElementById('phone-box'); if (!phone || !box) return;
+  document.documentElement.classList.add('is-phone'); box.hidden = false;
+  const url = location.origin + location.pathname, ok = document.getElementById('send-ok');
+  document.getElementById('send-self').addEventListener('click', async () => {
+    try { if (navigator.share) { await navigator.share({ title: 'Install QuickJobs', text: 'Open this on your computer to add QuickJobs to Chrome.', url }); ok.textContent = 'Sent. Open it in Chrome on your computer.'; return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+    try { await navigator.clipboard.writeText(url); ok.textContent = 'Link copied. Opening your email app…'; } catch (e) {}
+    location.href = 'mailto:?subject=' + encodeURIComponent('Install QuickJobs on my computer') + '&body=' + encodeURIComponent('Open this in Chrome on a laptop or desktop:\n' + url);
+  });
+})();
+</script>
 </body>
 </html>

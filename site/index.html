@@ -192,7 +192,7 @@ img{max-width:100%;display:block;height:auto}
 .toast p b{display:block;color:var(--fg);font-weight:600;font-size:.92rem}
 @media (prefers-reduced-motion:no-preference){.pop{animation:float 7s ease-in-out infinite}.toast{animation:float 7s ease-in-out -3.5s infinite}@keyframes float{50%{transform:translateY(-8px)}}}
 @media (max-width:960px){.pop{left:-6px}.toast{right:-6px}}
-@media (max-width:560px){.stage{padding-bottom:40px}.pop{width:42%}.toast{display:none}.live .long{display:none}}
+@media (max-width:560px){.stage{padding-bottom:40px}.pop{width:42%}.toast{display:none}.win-bar .long{display:none}}
 
 .boards{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
 @media (prefers-reduced-motion:no-preference){.boards{animation:boards-in .9s cubic-bezier(.2,.75,.2,1) .5s both}
@@ -510,6 +510,126 @@ footer a:hover{color:var(--fg)}
   td.us::before{color:var(--fern);font-weight:600}
   td .y{display:none}
 }
+/* ===== phones, second pass: shorter page, aligned rows, bigger tap targets ===== */
+.show-m,.m-note,.cmp-m,.st-nav{display:none}
+@media (max-width:640px){
+  .show-m{display:inline}
+  .logo{min-height:44px}
+  .nav .wrap{height:60px}
+  /* hero */
+  .pill{font-size:.8rem;padding:5px 11px 5px 8px}
+  .hero h1{font-size:clamp(2.3rem,10.6vw,2.9rem)}
+  .hero .inst-link{min-height:44px;margin-top:-6px}
+  .m-note{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;line-height:1.45;color:var(--muted);margin-top:-4px}
+  .m-note svg{width:18px;height:18px;color:var(--fern);flex:none;margin-top:2px}
+  .win-bar{padding:10px 14px;font-size:.82rem}
+  .win-bar .long{display:none}
+  .win-bar b,.win-bar .live{white-space:nowrap}
+  /* the eight places it works: one still grid, nothing to wait for */
+  .boards{margin-top:28px;gap:14px}
+  .boards-h{flex-direction:column;align-items:flex-start;gap:4px}
+  .marq{overflow:visible;-webkit-mask-image:none;mask-image:none;touch-action:auto;cursor:auto}
+  .marq-track{display:block;width:auto;transform:none!important}
+  .marq-grp[aria-hidden]{display:none}
+  .marq-grp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 6px;padding:0}
+  .mq{flex-direction:column;gap:7px;white-space:normal;text-align:center;min-width:0}
+  .mono{width:46px;height:46px}
+  .mq-t b{font-size:.8rem;font-weight:600;font-stretch:100%;letter-spacing:0}
+  .mq-t small{display:none}
+  /* rhythm */
+  section{padding-block:48px}
+  h2{font-size:clamp(1.7rem,7.6vw,2.05rem);line-height:1.1}
+  .sec-head{margin-bottom:24px}
+  .pain{gap:0}
+  .pain div{padding:18px 0;gap:6px;border-top-width:1px}
+  .pain div:last-child{padding-bottom:0}
+  .pain .n{font-size:1.9rem}
+  .pain h3{font-size:1.1rem}
+  .pain p{font-size:.96rem}
+  /* how it works: five cards to swipe, one screen tall */
+  .story{grid-template-columns:minmax(0,1fr)}
+  .story-l{min-width:0}
+  .story-steps{flex-direction:row;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin-inline:-16px;padding:2px 16px 4px;scroll-padding-inline:16px;overscroll-behavior-x:contain}
+  .story-steps::-webkit-scrollbar{display:none}
+  .st,.st:first-child{flex:0 0 86%;min-width:0;scroll-snap-align:start;justify-content:flex-start;gap:10px;padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+  .st h3{font-size:1.25rem}
+  .st p{font-size:.96rem}
+  .st .out{font-size:.84rem}
+  .st-shot{margin-top:auto;padding-top:8px}
+  .st-shot .shot{flex:none;box-shadow:none;border-radius:12px;max-height:300px}
+  .st-shot .shot+.shot{display:none}
+  .st-shot img{width:100%;height:auto}
+  .st-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px}
+  .st-dots{display:flex;gap:0;margin-left:-8px}
+  .st-dots button{appearance:none;border:0;background:none;padding:0;width:32px;height:44px;display:grid;place-items:center;cursor:pointer}
+  .st-dots i{display:block;width:8px;height:8px;border-radius:99px;background:var(--line-2);transition:width .2s,background .2s}
+  .st-dots [aria-current] i{width:22px;background:var(--fern)}
+  .st-count{font-size:.86rem;color:var(--faint);font-variant-numeric:tabular-nums}
+  .st-count b{color:var(--fg);font-family:var(--display)}
+  /* control */
+  .bento{gap:12px}
+  .card h3{font-size:1.12rem}
+  .card p{font-size:.95rem}
+  .card.c-third{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 14px;padding:16px;align-items:start}
+  .card.c-third .ico{grid-row:span 2}
+  .card.c-third h3{font-size:1.04rem;align-self:center}
+  .card.c-third p{grid-column:2;font-size:.92rem}
+  .ctl{padding:14px}
+  /* forms */
+  .forms{gap:28px}
+  .forms ul{margin-top:20px;gap:12px}
+  .forms li{font-size:.96rem}
+  .formcard{padding:18px;gap:0;border-radius:16px}
+  .formcard header{align-items:flex-start;margin-bottom:4px}
+  .q{grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .q:last-child{border-bottom:0;padding-bottom:0}
+  .q label{font-size:.88rem}
+  .q .a{grid-row:span 2;justify-self:end}
+  .q .v{font-size:.95rem;padding:6px 10px;white-space:normal;text-align:right}
+  .q.wait{grid-template-columns:1fr}.q.wait .a{grid-row:auto;justify-self:start;margin-top:4px}
+  /* privacy: one list, icon on the left */
+  .trust{gap:0;border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+  .trust div{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 14px;padding:16px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;align-items:start}
+  .trust div:last-child{border-bottom:0}
+  .trust .ico{grid-row:span 2}
+  .trust h3{font-size:1.04rem;align-self:center}
+  .trust p{grid-column:2;font-size:.92rem}
+  /* compare: QuickJobs beside one alternative at a time */
+  .cmp-on .tbl{display:none}
+  .cmp-m{display:block;border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+  .cmp-pick{padding:14px 14px 12px;border-bottom:1px solid var(--line)}
+  .cmp-pick small{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--faint);margin-bottom:8px}
+  .cmp-seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--sunk);border:1px solid var(--line-2);border-radius:12px;padding:4px}
+  .cmp-seg button{appearance:none;border:0;background:none;color:var(--muted);font:600 .84rem/1.15 var(--body);min-height:44px;padding:4px 6px;border-radius:9px;cursor:pointer}
+  .cmp-seg button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:0 0 0 1px var(--line-2)}
+  .cmp-cols,.cmp-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .cmp-cols{padding:10px 14px;font:600 .8rem var(--display);position:sticky;top:60px;background:var(--surface);border-bottom:1px solid var(--line);z-index:1}
+  .cmp-cols span:first-child{color:var(--fern)}
+  .cmp-cols span:last-child{color:var(--muted)}
+  .cmp-m ul{list-style:none;margin:0;padding:0}
+  .cmp-m li{padding:12px 14px;border-bottom:1px solid var(--line)}
+  .cmp-m li:last-child{border-bottom:0}
+  .cmp-f{display:block;font-family:var(--display);font-weight:600;font-size:.98rem;line-height:1.3;margin-bottom:8px}
+  .cmp-pair span{font-size:.88rem;line-height:1.35;padding:8px 10px;border-radius:9px;min-width:0}
+  .cmp-pair .u{background:var(--fern-soft);color:var(--fg);font-weight:500;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px}
+  .cmp-pair .u::before{content:"✓";color:var(--fern);font-weight:700}
+  .cmp-pair .u.plain{display:block}
+  .cmp-pair .u.plain::before{content:none}
+  .cmp-pair .t{background:var(--sunk);color:var(--muted)}
+  /* questions, last call */
+  .faq{gap:20px}
+  summary{font-size:1.04rem;padding:18px 40px 18px 0}
+  details p{font-size:.96rem}
+  .copy{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+  .final{padding:32px 18px;gap:24px}
+  .final h2{font-size:clamp(1.8rem,8.4vw,2.3rem)}
+  .ticks{flex-direction:column;gap:8px}
+  .joinbox .err:empty{display:none}
+}
+@media (max-width:359px){.marq-grp{gap:14px 2px}.mq-t b{font-size:.74rem}.cmp-seg button{font-size:.78rem}}
+@media (prefers-reduced-motion:reduce){.story-steps{scroll-behavior:auto}.st-dots i{transition:none}}
+
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* mobile menu: a labelled Menu button opens a drop-down sheet below the bar (≤1120 px, where the links are hidden) */
@@ -618,6 +738,7 @@ html.menu-open{overflow:hidden}
             </form>
             <p class="err" role="alert" aria-live="polite"></p>
           </div>
+          <p class="m-note"><svg aria-hidden="true"><use href="#i-laptop"/></svg><span>QuickJobs runs in Chrome on a computer. Join from your phone now and your invite arrives by email.</span></p>
           <a class="inst-link" href="install">Already have an invite? Install the beta →</a>
         </div>
       </div>
@@ -670,7 +791,7 @@ html.menu-open{overflow:hidden}
         <div class="sec-head">
           <span class="eyebrow">How it works</span>
           <h2 id="how-h">One run a day, finished before your chai.</h2>
-          <p>QuickJobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. Scroll through one real run.</p>
+          <p>QuickJobs is a Chrome extension. It works through the job sites you're already signed in to, so it applies as you. <span class="hide-m">Scroll</span><span class="show-m">Swipe</span> through one real run.</p>
         </div>
         <ol class="story-steps">
           <li class="st on" data-i="0">
@@ -709,6 +830,7 @@ html.menu-open{overflow:hidden}
             <figure class="st-shot"><div class="shot"><img src="shots/s5-mail.webp?v=1110" width="1026" height="955" alt="A recruiter's interview invite, marked Needs you and linked to the application." loading="lazy"></div><div class="shot"><img src="shots/s5-post.webp?v=1110" width="1026" height="860" alt="A LinkedIn hiring post with the poster's email, ready to email." loading="lazy"></div></figure>
           </li>
         </ol>
+        <div class="st-nav" id="st-nav" hidden><div class="st-dots" role="group" aria-label="Steps of a run"></div><span class="st-count"><b id="st-now">1</b> of 5 · swipe</span></div>
         </div>
         <div class="story-stage" aria-hidden="true">
           <div class="stage-in">
@@ -846,8 +968,9 @@ html.menu-open{overflow:hidden}
         <span class="eyebrow">Why QuickJobs</span>
         <h2 id="cmp-h">The only one that covers all six Indian boards in one run.</h2>
       </div>
+      <div class="cmp-m" id="cmp-m" hidden></div>
       <div class="tbl">
-        <table>
+        <table id="cmp-t">
           <thead><tr><th scope="col"><span class="sr">What you need</span></th><th scope="col" class="us">QuickJobs</th><th scope="col">Applying by hand</th><th scope="col">Global auto-apply tools</th><th scope="col">A job board's own AI agent</th></tr></thead>
           <tbody>
             <tr><td>Naukri, iimjobs, Shine, Foundit, Hirist, Instahyre</td><td data-label="QuickJobs" class="us"><span class="y">✓</span> All six, every day</td><td data-label="By hand">One at a time</td><td data-label="Global tools">Mostly not covered</td><td data-label="A board's own agent">Its own site only</td></tr>
@@ -868,7 +991,7 @@ html.menu-open{overflow:hidden}
       <div class="sec-head" style="margin-bottom:0">
         <span class="eyebrow">Questions</span>
         <h2 id="faq-h">What people ask before they join.</h2>
-        <p>Something else on your mind? Write to <span class="copy">quickjobsbeta@gmail.com</span></p>
+        <p>Something else on your mind? Write to <a class="copy" href="mailto:quickjobsbeta@gmail.com">quickjobsbeta@gmail.com</a></p>
       </div>
       <div>
         <details name="faq" open><summary>Will my current employer find out?</summary><p>QuickJobs never applies to your current company: it's added to your blocked list from your profile, and you can add others. It doesn't change your profiles or visibility settings on any job site; those stay as you set them.</p></details>
@@ -1116,7 +1239,7 @@ html.menu-open{overflow:hidden}
 <script>
 /* Logo strip: drifts on its own; swipe or drag it and it follows your finger, then eases back into the drift. */
 (() => {
-  const m = document.querySelector('.marq'); if (!m || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const m = document.querySelector('.marq'); if (!m || matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 640px)').matches) return;
   const t = m.querySelector('.marq-track'), SECONDS_PER_LOOP = 50;
   let half = 0, x = 0, v = 0, drag = false, hover = false, lx = 0, lt = 0, prev = performance.now();
   const measure = () => { half = t.scrollWidth / 2; }; measure(); addEventListener('resize', measure); addEventListener('load', measure);
@@ -1140,6 +1263,44 @@ html.menu-open{overflow:hidden}
   m.addEventListener('pointerup', up); m.addEventListener('pointercancel', up);
   m.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hover = true; });
   m.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') hover = false; });
+})();
+</script>
+<script>
+/* Phones: the comparison shows QuickJobs beside one alternative at a time (built from the table, so the words live in one place),
+   and How it works becomes five cards to swipe, with dots. */
+(() => {
+  const t = document.getElementById('cmp-t'), box = document.getElementById('cmp-m');
+  if (t && box) {
+    const heads = [...t.querySelectorAll('thead th')].slice(2).map((h) => h.textContent.trim());
+    const short = [...t.querySelectorAll('tbody tr:first-child td')].slice(2).map((d) => d.dataset.label);
+    const rows = [...t.querySelectorAll('tbody tr')].map((r) => [...r.cells].map((c) => c.textContent.replace('✓', '').trim()));
+    const plain = [...t.querySelectorAll('tbody tr')].map((r) => !r.cells[1].querySelector('.y'));
+    const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    let pick = 0;
+    box.innerHTML = `<div class="cmp-pick"><small>Compare QuickJobs with</small><div class="cmp-seg" role="group" aria-label="Compare QuickJobs with">`
+      + ['By hand', 'Global tools', 'Job board AI'].slice(0, short.length).map((s, i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${s}</button>`).join('') + `</div></div>
+      <div class="cmp-cols" aria-hidden="true"><span>QuickJobs</span><span id="cmp-who"></span></div><ul id="cmp-rows"></ul>`;
+    const paint = () => {
+      box.querySelector('#cmp-who').textContent = heads[pick];
+      box.querySelector('#cmp-rows').innerHTML = rows.map((r, k) => `<li><span class="cmp-f">${esc(r[0])}</span><div class="cmp-pair">`
+        + `<span class="u${plain[k] ? ' plain' : ''}"><span class="sr">QuickJobs: </span>${esc(r[1])}</span><span class="t"><span class="sr">${esc(heads[pick])}: </span>${esc(r[2 + pick])}</span></div></li>`).join('');
+      box.querySelectorAll('.cmp-seg button').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.i === pick)));
+    };
+    box.addEventListener('click', (e) => { const b = e.target.closest('.cmp-seg button'); if (b) { pick = +b.dataset.i; paint(); } });
+    paint(); box.hidden = false; box.parentElement.classList.add('cmp-on');
+  }
+  const list = document.querySelector('.story-steps'), nav = document.getElementById('st-nav');
+  if (list && nav) {
+    const cards = [...list.children], dots = nav.querySelector('.st-dots'), now = document.getElementById('st-now');
+    dots.innerHTML = cards.map((_, i) => `<button type="button" aria-label="Step ${i + 1}"${i ? '' : ' aria-current="true"'}><i></i></button>`).join('');
+    const at = () => { const x = list.scrollLeft + 20; let k = 0; cards.forEach((c, i) => { if (c.offsetLeft - list.offsetLeft <= x) k = i; }); return k; };
+    let cur = 0;
+    const sync = () => { const k = at(); if (k === cur) return; cur = k; now.textContent = k + 1; [...dots.children].forEach((d, i) => i === k ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')); };
+    list.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    dots.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; const c = cards[[...dots.children].indexOf(b)];
+      list.scrollTo({ left: c.offsetLeft - list.offsetLeft - 16, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
+    nav.hidden = false;
+  }
 })();
 </script>
 </body>
