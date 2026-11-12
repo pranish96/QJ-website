@@ -733,7 +733,7 @@ html.menu-open{overflow:hidden}
           <div class="joinbox" data-join="hero">
             <form class="join" novalidate>
               <label class="sr" for="email-hero">Work or personal email</label>
-              <input id="email-hero" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@email.com" required>
+              <input id="email-hero" type="email" name="email" autocomplete="email" inputmode="email" enterkeyhint="go" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="you@email.com" required>
               <button class="btn btn-p" type="submit">Join the waitlist</button>
             </form>
             <p class="err" role="alert" aria-live="polite"></p>
@@ -1015,7 +1015,7 @@ html.menu-open{overflow:hidden}
         <div class="final-r joinbox" data-join="footer">
           <form class="join" novalidate>
             <label class="sr" for="email-foot">Email</label>
-            <input id="email-foot" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@email.com" required>
+            <input id="email-foot" type="email" name="email" autocomplete="email" inputmode="email" enterkeyhint="go" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="you@email.com" required>
             <button class="btn btn-p" type="submit">Join the waitlist</button>
           </form>
           <p class="err" role="alert" aria-live="polite"></p>
@@ -1086,9 +1086,41 @@ html.menu-open{overflow:hidden}
   const nav = $('#nav');
   const onScroll = () => nav.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  // "Join the waitlist" links: go to the hero form and put the cursor in it.
+  // On a phone the keyboard covers the bottom half of the screen, so the form is brought up to just
+  // under the top bar (the field and the button both stay above the keyboard), and kept there while
+  // the keyboard opens. Focus happens inside the tap itself, or iPhones won't open the keyboard.
+  const phone = () => matchMedia('(max-width:640px)').matches;
+  const navH = () => (nav ? nav.getBoundingClientRect().bottom : 0) + 12;
+  const raise = (box, smooth) => {
+    const vv = window.visualViewport, r = box.getBoundingClientRect();
+    const visTop = vv ? vv.offsetTop : 0, visH = vv ? vv.height : innerHeight;
+    let dy = 0;
+    if (r.top < navH()) dy = r.top - navH();                                     // under the top bar
+    else if (r.bottom > visTop + visH - 12) dy = Math.min(r.bottom - (visTop + visH - 12), r.top - navH());   // under the keyboard
+    if (Math.abs(dy) > 2) scrollBy({ top: dy, behavior: smooth ? 'smooth' : 'instant' });
+  };
+  const keepUp = (input) => {
+    const box = input.closest('.joinbox'); if (!box || !phone()) return;
+    const vv = window.visualViewport;
+    const fit = () => { if (document.activeElement === input) raise(box, false); };
+    if (vv) { vv.addEventListener('resize', fit); input.addEventListener('blur', () => vv.removeEventListener('resize', fit), { once: true }); }
+    setTimeout(fit, 350); setTimeout(fit, 700);                                    // keyboards that don't resize the viewport
+  };
+  $$('.join input').forEach((i) => i.addEventListener('focus', () => keepUp(i)));
   $$('[data-focus-join]').forEach((a) => a.addEventListener('click', (e) => {
-    e.preventDefault(); scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    setTimeout(() => { const i = $('#email-hero'); if (i) i.focus({ preventScroll: true }); }, 400);
+    e.preventDefault();
+    const i = $('#email-hero'); if (!i) return;
+    const calmMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.documentElement.classList.remove('menu-open');                      // the menu (closing itself) locks scrolling
+    if (phone()) {
+      const box = i.closest('.joinbox');
+      scrollTo({ top: Math.max(0, scrollY + box.getBoundingClientRect().top - navH()), behavior: 'instant' });
+      i.focus({ preventScroll: true });
+    } else {
+      scrollTo({ top: 0, behavior: calmMotion ? 'auto' : 'smooth' });
+      setTimeout(() => i.focus({ preventScroll: true }), 400);
+    }
   }));
 
   // phones: a join bar at the bottom once the hero form is off screen, hidden near the other form or after joining
