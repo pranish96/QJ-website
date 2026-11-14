@@ -1328,7 +1328,11 @@ html.menu-open{overflow:hidden}
   if (list && nav) {
     const cards = [...list.children], dots = nav.querySelector('.st-dots'), now = document.getElementById('st-now');
     dots.innerHTML = cards.map((_, i) => `<button type="button" aria-label="Step ${i + 1}"${i ? '' : ' aria-current="true"'}><i></i></button>`).join('');
-    const at = () => { const x = list.scrollLeft + 20; let k = 0; cards.forEach((c, i) => { if (c.offsetLeft - list.offsetLeft <= x) k = i; }); return k; };
+    const at = () => {
+      const end = list.scrollWidth - list.clientWidth;
+      if (end > 8 && list.scrollLeft >= end - 8) return cards.length - 1; // scrolled to the end: last card
+      const x = list.scrollLeft + 20; let k = 0; cards.forEach((c, i) => { if (c.offsetLeft - list.offsetLeft <= x) k = i; }); return k;
+    };
     let cur = 0;
     const sync = () => { const k = at(); if (k === cur) return; cur = k; now.textContent = k + 1; [...dots.children].forEach((d, i) => i === k ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')); };
     list.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
