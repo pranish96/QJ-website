@@ -570,6 +570,14 @@ footer a:hover{color:var(--fg)}
 html.menu-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.mnav,.mnav-p,.mb-i i{transition:none}}
 </style>
+<style>
+.fd-story{color:var(--muted);font-size:1.12rem;line-height:1.65;max-width:760px}
+.fd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:32px}
+.fd-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:8px}
+.fd-card h3{font-family:var(--display);font-size:1.5rem;letter-spacing:-.02em}
+.fd-edu{color:var(--fern);font-size:.95rem;font-weight:600}
+@media (max-width:760px){.fd-grid{grid-template-columns:1fr;margin-top:24px}.fd-card{padding:20px}}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXN8JF9W" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -672,6 +680,19 @@ html.menu-open{overflow:hidden}
           <p>Thanks. We'll reply to <b id="ct-to"></b> within 2 business days.</p>
           <button class="btn btn-o btn-s" type="button" id="ct-again">Send another message</button>
         </div>
+      </div>
+    </div>
+  </section>
+  <section class="gut" id="founders" aria-labelledby="fd-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Who's behind QuickJobs</span>
+        <h2 id="fd-h">Two engineers, one very boring problem.</h2>
+        <p class="fd-story">We kept spending our evenings typing "Expected CTC (in lakhs)" into six job sites. Around the hundredth form, we remembered we're engineers, and engineers automate whatever annoys them. So QuickJobs does the boring part every day and leaves the interviews to you.</p>
+      </div>
+      <div class="fd-grid">
+        <div class="fd-card"><h3>Avnish Singh</h3><div class="fd-edu">IIT Roorkee and IISc graduate</div></div>
+        <div class="fd-card"><h3>Pranish Ramteke</h3><div class="fd-edu">IIT Madras graduate</div></div>
       </div>
     </div>
   </section>
