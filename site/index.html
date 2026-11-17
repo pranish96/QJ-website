@@ -1229,7 +1229,13 @@ html.menu-open{overflow:hidden}
   function showDone(box, email, r) {
     const n = $('#done-tpl').content.firstElementChild.cloneNode(true);
     $('[data-email]', n).textContent = email;
-    if (r.already) $('[data-title]', n).textContent = "You're already on the list.";
+    if (r.code_coming) {
+      // The server emails the beta code on its own as soon as the sign-up is saved (once; nothing here can send it again).
+      const b = document.createElement('b'); b.textContent = email;
+      $('[data-title]', n).textContent = r.already ? "You're in." : "You're in. Check your inbox.";
+      $('[data-sub]', n).replaceChildren(r.already ? 'We sent your beta code to ' : 'Your beta code is on its way to ', b,
+        r.already ? '. Search your inbox for “QuickJobs beta code”.' : '. It usually arrives within a minute. Not there? Check Promotions or Spam.');
+    } else if (r.already) $('[data-title]', n).textContent = "You're already on the list.";
     const code = r.ref_code;
     const qs = $('[data-qs]', n);
     if (!code || r.already) qs.remove();
@@ -1253,8 +1259,8 @@ html.menu-open{overflow:hidden}
       err.textContent = ''; btn.disabled = true; const label = btn.textContent; btn.textContent = 'Joining…';
       try {
         const r = await join(email);
-        store.set('qj-joined', { email, ref_code: r.ref_code ?? null }); window.__qjSyncBar?.();
-        $$('.joinbox').forEach((b) => showDone(b, email, b === box ? r : { already: true, ref_code: r.ref_code }));
+        store.set('qj-joined', { email, ref_code: r.ref_code ?? null, code_coming: !!r.code_coming }); window.__qjSyncBar?.();
+        $$('.joinbox').forEach((b) => showDone(b, email, b === box ? r : { already: true, ref_code: r.ref_code, code_coming: !!r.code_coming }));
       } catch (ex) {
         btn.disabled = false; btn.textContent = label;
         err.innerHTML = ex.nodb
@@ -1267,7 +1273,7 @@ html.menu-open{overflow:hidden}
 
   // someone who joined before sees their status, not the form
   const prev = store.get('qj-joined');
-  if (prev?.email) $$('.joinbox').forEach((b) => showDone(b, prev.email, { already: true, ref_code: prev.ref_code }));
+  if (prev?.email) $$('.joinbox').forEach((b) => showDone(b, prev.email, { already: true, ref_code: prev.ref_code, code_coming: !!prev.code_coming }));
 })();
 </script>
 
