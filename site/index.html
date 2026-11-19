@@ -29,6 +29,7 @@
 // row-level security and the two waitlist functions allow. Set "site" to the real address once the domain exists.
 window.QJ_CFG = { url: "https://igaryftppmiybqhywkwb.supabase.co", key: "sb_publishable_nxs_TkYVSCBXH8H1lZXMHg_Xxqd8hSD", site: "" };
 </script>
+<script src="track.js?v=1" defer></script>
 <style>
 /* Layout: left-weighted hero with the product stacked on the right under the aurora; long dark "night forest" scroll,
    sections alternate text-led and screenshot-led; one bold element (the aurora), everything else quiet. */
@@ -1267,6 +1268,7 @@ html.menu-open{overflow:hidden}
       err.textContent = ''; btn.disabled = true; const label = btn.textContent; btn.textContent = 'Joining…';
       try {
         const r = await join(email);
+        window.qjTrack?.('waitlist_joined');
         store.set('qj-joined', { email, ref_code: r.ref_code ?? null, code_coming: !!r.code_coming }); window.__qjSyncBar?.();
         $$('.joinbox').forEach((b) => showDone(b, email, b === box ? r : { already: true, ref_code: r.ref_code, code_coming: !!r.code_coming }));
       } catch (ex) {
