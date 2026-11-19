@@ -559,9 +559,9 @@ html.menu-open{overflow:hidden}
 .follow-facts li b{overflow-wrap:anywhere}
 .follow-facts svg{width:18px;height:18px;flex:none;color:var(--fern);margin-top:2px}
 .from-join .store-btn{background:transparent;color:var(--fern);border:1px solid rgba(79,191,134,.45);box-shadow:none;height:50px;font-size:1rem}
-.inst>li.now .inst-t::before{background:var(--fern);border-color:var(--fern);color:var(--fern-ink);box-shadow:0 0 0 5px rgba(79,191,134,.18)}
-.inst>li.now .inst-t h4::after{content:"You are here";margin-left:10px;vertical-align:middle;font:600 .7rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--fern-ink);background:var(--fern);padding:3px 8px;border-radius:999px}
-.inst>li.done .inst-t::before{content:"✓";background:var(--fern-soft);border-color:rgba(79,191,134,.45);color:var(--fern)}
+.inst>li.step-now .inst-t::before{background:var(--fern);border-color:var(--fern);color:var(--fern-ink);box-shadow:0 0 0 5px rgba(79,191,134,.18)}
+.inst>li.step-now .inst-t h4::after{content:"You are here";margin-left:10px;vertical-align:middle;font:600 .7rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--fern-ink);background:var(--fern);padding:3px 8px;border-radius:999px}
+.inst>li.step-done .inst-t::before{content:"✓";background:var(--fern-soft);border-color:rgba(79,191,134,.45);color:var(--fern)}
 .store-btn{height:58px;padding:0 26px;font-size:1.1rem;gap:12px;text-decoration:none}
 .store-btn svg{width:26px;height:26px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -850,7 +850,7 @@ html.menu-open{overflow:hidden}
   const btn = document.querySelector('.store-btn'); if (btn) btn.firstChild && btn.childNodes.forEach((n) => { if (n.nodeType === 3 && /Add to Chrome/.test(n.nodeValue)) n.nodeValue = 'Store tab didn\u2019t open? Open it again'; });
   $('dl-note').textContent = 'Only if the store tab didn\u2019t open, or you closed it.';
   const steps = [...document.querySelectorAll('.inst > li')];
-  const mark = (i) => steps.forEach((li, k) => { li.classList.toggle('now', k === i); li.classList.toggle('done', k < i); });
+  const mark = (i) => steps.forEach((li, k) => { li.classList.toggle('step-now', k === i); li.classList.toggle('step-done', k < i); });
   mark(0);
   let away = false;
   document.addEventListener('visibilitychange', () => {
