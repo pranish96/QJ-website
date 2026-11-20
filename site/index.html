@@ -393,6 +393,20 @@ section{padding-block:96px}
 /* pipeline */
 .pipe{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
 .pipe .full{grid-column:1/-1}
+/* the applications heat map: a card the height of the jobs list beside it, the grid filling its width */
+.heat{margin:0;display:flex;flex-direction:column;gap:16px;padding:22px 24px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);box-shadow:0 30px 70px -35px var(--shadow)}
+.heat figcaption{display:flex;flex-direction:column;gap:4px}
+.heat figcaption b{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--fg)}
+.heat figcaption span{font-size:.92rem;color:var(--muted)}
+.heat-grid{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:5px;margin-top:auto}
+.heat-grid i,.heat-key i{display:block;aspect-ratio:1;border-radius:4px;background:rgba(79,191,134,.09)}
+.heat i.l1{background:rgba(79,191,134,.38)}
+.heat i.l2{background:rgba(79,191,134,.68)}
+.heat i.l3{background:var(--fern)}
+.heat-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.78rem;color:var(--faint)}
+.heat-key{display:inline-flex;align-items:center;gap:4px}
+.heat-key i{width:11px;border-radius:3px}
+@media (max-width:960px){.heat-grid,.heat-foot{max-width:520px;width:100%}}
 @media (max-width:960px){.pipe{grid-template-columns:1fr}}
 
 /* trust */
@@ -965,7 +979,12 @@ html.menu-open{overflow:hidden}
       <div class="pipe">
         <div class="shot full"><picture><source media="(max-width:640px)" srcset="shots/pipeline-m.webp?v=1110" width="1026" height="639"><img src="shots/pipeline.webp?v=1110" width="1608" height="198" alt="Pipeline totals: 256 found, 151 passed filters, 7 waiting for you, 107 applied, 12 recruiters replied, 4 interviews." loading="lazy"></picture></div>
         <div class="shot hide-m"><img src="shots/applied.webp?v=1110" width="1608" height="595" alt="Applied jobs with stages; one marked Interview with the recruiter's interview email linked under it." loading="lazy"></div>
-        <div class="shot" style="align-self:start"><picture><source media="(max-width:640px)" srcset="shots/heat-m.webp?v=1110" width="1026" height="408"><img src="shots/heat.webp?v=1110" width="1608" height="228" alt="A 12-week grid of application days: 107 applications on 35 days." loading="lazy"></picture></div>
+        <!-- Built in the page (not a screenshot), so it stays sharp and fills its column at any width. Same example data. -->
+        <figure class="heat" aria-label="Applications over the last 12 weeks: 107 applications on 35 days, longest streak 6 days">
+          <figcaption><b>Applications, last 12 weeks</b><span>107 applications on 35 days · longest streak 6 days</span></figcaption>
+          <div class="heat-grid" aria-hidden="true"><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l0"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l2"></i><i class="l1"></i><i class="l0"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l2"></i><i class="l0"></i><i class="l2"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l2"></i><i class="l1"></i><i class="l0"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l0"></i></div>
+          <div class="heat-foot" aria-hidden="true"><span>12 weeks ago</span><span class="heat-key">Less <i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i> More</span><span>This week</span></div>
+        </figure>
       </div>
       <p class="cap" style="margin-top:14px">Six weeks of an example search by a senior product analyst in Bengaluru. Companies are made up.</p>
     </div>
